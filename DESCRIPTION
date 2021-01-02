@@ -21,3 +21,5 @@ RoxygenNote: 7.1.1
 URL: https://jesse-smith.github.io/covidassign/,
     https://github.com/jesse-smith/covidassign
 BugReports: https://github.com/jesse-smith/covidassign/issues
+Depends: 
+    R (>= 2.10)
