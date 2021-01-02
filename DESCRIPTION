@@ -1,0 +1,19 @@
+Package: covidassign
+Title: COVID-19 Case Assignment for SCHD
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Jesse",
+           family = "Smith",
+           role = c("aut", "cre"),
+           email = "jesse.smith@shelbycountytn.gov",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: covidassign handles COVID-19 case assignment for
+    investigation within the Shelby County Health Department.
+License: GPL (>= 3)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
