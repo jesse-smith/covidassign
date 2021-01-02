@@ -1,0 +1,4 @@
+template:
+  params:
+    bootswatch: darkly
+url: https://jesse-smith.github.io/covidassign/
