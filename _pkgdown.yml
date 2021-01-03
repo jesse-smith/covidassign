@@ -1,4 +1,4 @@
 template:
   params:
-    bootswatch: darkly
+    bootswatch: paper
 url: https://jesse-smith.github.io/covidassign/
