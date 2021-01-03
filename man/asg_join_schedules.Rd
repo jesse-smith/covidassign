@@ -9,7 +9,7 @@ asg_join_schedules(teams, schedules = team_schedules)
 \arguments{
 \item{teams}{A data frame containing teams in columns and members in rows;
 designed to take the output of
-\code{\link[coviData:asg_parse_teams]{asg_parse_teams()}}}
+\code{\link[covidassign:asg_parse_teams]{asg_parse_teams()}}}
 
 \item{schedules}{Schedules for each team, given by the \code{team_schedules}
 dataset}
@@ -28,9 +28,9 @@ Other Case Assignment:
 \code{\link{asg_calc_schedules}()},
 \code{\link{asg_load_nights_weekends}()},
 \code{\link{asg_load_teams}()},
-\code{\link{asg_parse_names}()},
 \code{\link{asg_parse_nights_weekends}()},
 \code{\link{asg_schedule_predefined}()},
-\code{\link{asg_schedule}()}
+\code{\link{asg_schedule}()},
+\code{\link{asg_std_names}()}
 }
 \concept{Case Assignment}

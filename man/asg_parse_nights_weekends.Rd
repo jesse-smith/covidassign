@@ -8,7 +8,9 @@ asg_parse_nights_weekends(.data)
 }
 \arguments{
 \item{.data}{Data read by
-\code{\link[covidata:asg_load_nights_weekends]{asg_load_nights_weekends()}}}
+\code{
+  \link[covidassign:asg_load_nights_weekends]{asg_load_nights_weekends()}
+  }}
 }
 \value{
 A \code{tibble} with one row per investigator and columns named \code{member}
@@ -26,8 +28,8 @@ Other Case Assignment:
 \code{\link{asg_join_schedules}()},
 \code{\link{asg_load_nights_weekends}()},
 \code{\link{asg_load_teams}()},
-\code{\link{asg_parse_names}()},
 \code{\link{asg_schedule_predefined}()},
-\code{\link{asg_schedule}()}
+\code{\link{asg_schedule}()},
+\code{\link{asg_std_names}()}
 }
 \concept{Case Assignment}

@@ -28,7 +28,7 @@
 #' @family Case Assignment
 #'
 #' @export
-asg_parse_names <- function(string) {
+asg_std_names <- function(string) {
   string %>%
     str_replace_brackets() %>%
     str_replace_braces() %>%
@@ -197,9 +197,9 @@ str_trim_dashes <- function(string) {
 #' @export
 parse_weekday <- function(day) {
 
-  vec_assert(day, ptype = character())
+  vctrs::vec_assert(day, ptype = character())
 
-  day <- standardize_string(day)
+  day <- asg_std_names(day)
 
   day_len_1 <- stringr::str_length(day) == 1L
 

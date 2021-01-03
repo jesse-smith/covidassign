@@ -4,7 +4,9 @@
 #' format for case assignment.
 #'
 #' @param .data Data read by
-#'   \code{\link[covidata:asg_load_nights_weekends]{asg_load_nights_weekends()}}
+#'   \code{
+#'   \link[covidassign:asg_load_nights_weekends]{asg_load_nights_weekends()}
+#'   }
 #'
 #' @return A `tibble` with one row per investigator and columns named `member`
 #'   and `schedule`; the latter is a list-column containing named logical
@@ -15,11 +17,11 @@
 #' @export
 asg_parse_nights_weekends <- function(.data) {
   .data %>%
-    dplyr::mutate(role = standardize_string(.data[["role"]])) %>%
+    dplyr::mutate(role = asg_std_names(.data[["role"]])) %>%
     dplyr::filter(.data[["role"]] == "Investigator") %>%
     dplyr::select(-c("role", "schedule", "notes")) %>%
     dplyr::mutate(
-      member = asg_parse_names(.data[["member"]]),
+      member = asg_std_names(.data[["member"]]),
       dplyr::across(!"member", ~ !is.na(.x))
     ) %>%
     tidyr::pivot_longer(
@@ -29,5 +31,9 @@ asg_parse_nights_weekends <- function(.data) {
     ) %>%
     dplyr::mutate(weekday = parse_weekday(.data[["weekday"]])) %>%
     dplyr::group_by(.data[["member"]]) %>%
-    dplyr::summarize(schedule = list(schedule = set_names(scheduled, weekday)))
+    dplyr::summarize(
+      schedule = list(
+        schedule = set_names(.data[["scheduled"]], .data[["weekday"]])
+      )
+    )
 }

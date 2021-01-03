@@ -8,16 +8,16 @@
 #' @return A `tibble` containing one column for each team (named with that
 #' team's letter designation) and one row per team member. Team member names
 #' are standardized with
-#' \code{\link[coviData:asg_parse_names]{asg_parse_names()}}.
+#' \code{\link[covidassign:asg_std_names]{asg_parse_names()}}.
 #'
 #' @export
 asg_parse_teams <- function(.data) {
   .data %>%
     # Find rows with investigator names
     dplyr::mutate(
-      row = vec_seq_along(.),
+      row = vctrs::vec_seq_along(.),
       inv_role = tidyr::replace_na(.data[["role"]] == "Investigators", FALSE),
-      inv_start_row = .data[["row"]][inv_role],
+      inv_start_row = .data[["row"]][.data[["inv_role"]]],
       .before = 1L
     ) %>%
     # Filter to rows with investigator names
@@ -28,6 +28,6 @@ asg_parse_teams <- function(.data) {
     janitor::remove_empty(which = "rows") %>%
     # Parse investigator names
     dplyr::mutate(
-      dplyr::across(dplyr::everything(), ~ asg_parse_names(.x))
+      dplyr::across(dplyr::everything(), ~ asg_std_names(.x))
     )
 }

@@ -13,7 +13,7 @@ asg_parse_teams(.data)
 A \code{tibble} containing one column for each team (named with that
 team's letter designation) and one row per team member. Team member names
 are standardized with
-\code{\link[coviData:asg_parse_names]{asg_parse_names()}}.
+\code{\link[covidassign:asg_std_names]{asg_parse_names()}}.
 }
 \description{
 \code{asg_parse_teams()} parses the data returned from \code{asg_load_teams()} into

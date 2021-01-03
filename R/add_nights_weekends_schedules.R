@@ -33,8 +33,7 @@ asg_add_nights_weekends_schedules <- function(
     dplyr::filter(.data[["schedule"]] == "nights-weekends")
 
   # Join nights-weekends only for more informative message
-  rlang::inform("Joining nights-weekends team schedules...")
-  tidylog::left_join(
+  dplyr::left_join(
     nights_weekends_teams,
     nights_weekends_schedules,
     by = "member",

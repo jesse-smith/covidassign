@@ -37,13 +37,13 @@ asg_download_redcap_investigators <- function(
     dplyr::pull("select_choices_or_calculations") %>%
     stringr::str_split(pattern = " [|] ") %>%
     purrr::flatten_chr() %>%
-    tibble::as_tibble_col("inv") %>%
+    dplyr::as_tibble() %>%
     tidyr::separate(
-      col = "inv",
+      col = "value",
       into = c("id", "investigator"),
       sep = "[,] "
     ) %>%
     dplyr::mutate(
-      investigator = asg_parse_names(.data[["investigator"]])
+      investigator = asg_std_names(.data[["investigator"]])
     )
 }

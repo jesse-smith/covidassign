@@ -5,7 +5,7 @@
 #'
 #' @param teams A data frame containing teams in columns and members in rows;
 #'   designed to take the output of
-#'   \code{\link[coviData:asg_parse_teams]{asg_parse_teams()}}
+#'   \code{\link[covidassign:asg_parse_teams]{asg_parse_teams()}}
 #'
 #' @param schedules Schedules for each team, given by the `team_schedules`
 #'   dataset
@@ -23,7 +23,7 @@ asg_join_schedules <- function(teams, schedules = team_schedules) {
       names_to = "team",
       values_to = "member"
     ) %>%
-    na.omit() %>%
+    stats::na.omit() %>%
     dplyr::arrange(.data[["team"]], .data[["member"]]) %>%
     dplyr::left_join(
       team_schedules,

@@ -32,9 +32,9 @@ Other Case Assignment:
 \code{\link{asg_calc_schedules}()},
 \code{\link{asg_join_schedules}()},
 \code{\link{asg_load_teams}()},
-\code{\link{asg_parse_names}()},
 \code{\link{asg_parse_nights_weekends}()},
 \code{\link{asg_schedule_predefined}()},
-\code{\link{asg_schedule}()}
+\code{\link{asg_schedule}()},
+\code{\link{asg_std_names}()}
 }
 \concept{Case Assignment}

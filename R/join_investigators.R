@@ -54,8 +54,8 @@ asg_join_investigators <- function(
   } else if (type == "anti_schedule") {
     if (!quiet) rlang::inform("Returning names only in scheduled list...")
     dplyr::anti_join(
-      .schedule,
-      .redcap,
+      inv_scheduled,
+      inv_redcap,
       by = "investigator"
     ) %>%
       dplyr::select("investigator") %>%
@@ -63,8 +63,8 @@ asg_join_investigators <- function(
   } else {
     if (!quiet) rlang::inform("Returning names only in REDcap list...")
     dplyr::anti_join(
-      .redcap,
-      .schedule,
+      inv_redcap,
+      inv_scheduled,
       by = "investigator"
     ) %>%
       dplyr::select("investigator") %>%

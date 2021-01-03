@@ -7,19 +7,34 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jesse.smith@shelbycountytn.gov",
            comment = c(ORCID = "0000-0001-7375-2463"))
-Description: covidassign handles COVID-19 case assignment for
-    investigation within the Shelby County Health Department.
+Description: covidassign handles COVID-19 case assignment
+    for investigation within the Shelby County Health Department.
 License: GPL (>= 3)
-Suggests: 
-    testthat (>= 3.0.0),
-    covr
-Config/testthat/edition: 3
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
 URL: https://jesse-smith.github.io/covidassign/,
     https://github.com/jesse-smith/covidassign
 BugReports: https://github.com/jesse-smith/covidassign/issues
 Depends: 
     R (>= 2.10)
+Imports: 
+    dplyr,
+    httr,
+    janitor,
+    jsonlite,
+    lubridate,
+    magrittr,
+    purrr,
+    readxl,
+    rlang (>= 0.1.2),
+    stringr,
+    tidyr,
+    vctrs,
+    fs
+Suggests: 
+    covr,
+    testthat (>= 3.0.0),
+    roxygen2
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
