@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Whether Investigators Are Working on a Given Date — asg_calc_schedules • covidassign</title>
+<title>Objects exported from other packages — reexports • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,13 @@
 
 
 
-<meta property="og:title" content="Calculate Whether Investigators Are Working on a Given Date — asg_calc_schedules" />
-<meta property="og:description" content="asg_calc_schedules() takes the output of
-asg_add_nights_weekends_schedules() and calcuates whether investigators are
-scheduled to work on date. Either a predefined schedule or a custom
-schedule must be supplied for every investigator." />
+<meta property="og:title" content="Objects exported from other packages — reexports" />
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  magrittr%&amp;gt;%
+
+" />
 
 
 
@@ -111,47 +113,22 @@ schedule must be supplied for every investigator." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Whether Investigators Are Working on a Given Date</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/calc_schedules.R'><code>R/calc_schedules.R</code></a></small>
-    <div class="hidden name"><code>asg_calc_schedules.Rd</code></div>
+    <h1>Objects exported from other packages</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/utils-magrittr.R'><code>R/utils-magrittr.R</code></a></small>
+    <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>asg_calc_schedules()</code> takes the output of
-<code><a href='asg_add_nights_weekends_schedules.html'>asg_add_nights_weekends_schedules()</a></code> and calcuates whether investigators are
-scheduled to work on <code>date</code>. Either a predefined schedule or a custom
-schedule must be supplied for every investigator.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+<dl>
+  <dt>magrittr</dt><dd><p><code>%&gt;%</code></p></dd>
+
+</dl>
     </div>
 
-    <pre class="usage"><span class='fu'>asg_calc_schedules</span><span class='op'>(</span><span class='va'>.data</span>, date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.data</th>
-      <td><p>The output of <code>asg_join_nights_weekends()</code></p></td>
-    </tr>
-    <tr>
-      <th>date</th>
-      <td><p>The date to use when checking whether investigators are scheduled</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code>tibble</code> with columns <code>team</code>, <code>member</code>, and <code>scheduled</code></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other Case Assignment: 
-<code><a href='asg_add_nights_weekends_schedules.html'>asg_add_nights_weekends_schedules</a>()</code>,
-<code><a href='asg_join_schedules.html'>asg_join_schedules</a>()</code>,
-<code><a href='asg_load_nights_weekends.html'>asg_load_nights_weekends</a>()</code>,
-<code><a href='asg_load_teams.html'>asg_load_teams</a>()</code>,
-<code><a href='asg_parse_nights_weekends.html'>asg_parse_nights_weekends</a>()</code>,
-<code><a href='asg_schedule_predefined.html'>asg_schedule_predefined</a>()</code>,
-<code><a href='asg_schedule.html'>asg_schedule</a>()</code>,
-<code><a href='asg_std_names.html'>asg_std_names</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Whether Investigators Are Working on a Given Date — asg_calc_schedules • covidassign</title>
+<title>Parse Investigator Names and Remove (Most) Non-Alphabetical Characters — asg_std_names • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,27 @@
 
 
 
-<meta property="og:title" content="Calculate Whether Investigators Are Working on a Given Date — asg_calc_schedules" />
-<meta property="og:description" content="asg_calc_schedules() takes the output of
-asg_add_nights_weekends_schedules() and calcuates whether investigators are
-scheduled to work on date. Either a predefined schedule or a custom
-schedule must be supplied for every investigator." />
+<meta property="og:title" content="Parse Investigator Names and Remove (Most) Non-Alphabetical Characters — asg_std_names" />
+<meta property="og:description" content="asg_std_names() parses investigator names given in the teams
+worksheet into a standard format for matching with REDcap. It:
+Replaces square brackets and curly braces with parentheses
+Removes parenthetic expressions
+Removes ordinal and numeric expressions
+Converts NAs to text (for the next function)
+Passes the intermediate to
+
+      make_clean_names(
+        case = &quot;title&quot;,
+        use_make_names = FALSE,
+        transliterations = c(&quot;Any-Latin&quot;, &quot;Latin-ASCII&quot;),
+        sep_out = &quot; &quot;
+      )
+    
+Removes leading and trailing dashes
+Removes extraneous whitespace
+Inverts converted NAs (back to NA_character_)
+
+" />
 
 
 
@@ -111,47 +127,59 @@ schedule must be supplied for every investigator." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Whether Investigators Are Working on a Given Date</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/calc_schedules.R'><code>R/calc_schedules.R</code></a></small>
-    <div class="hidden name"><code>asg_calc_schedules.Rd</code></div>
+    <h1>Parse Investigator Names and Remove (Most) Non-Alphabetical Characters</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/std_names.R'><code>R/std_names.R</code></a></small>
+    <div class="hidden name"><code>asg_std_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>asg_calc_schedules()</code> takes the output of
-<code><a href='asg_add_nights_weekends_schedules.html'>asg_add_nights_weekends_schedules()</a></code> and calcuates whether investigators are
-scheduled to work on <code>date</code>. Either a predefined schedule or a custom
-schedule must be supplied for every investigator.</p>
+    <p><code>asg_std_names()</code> parses investigator names given in the teams
+worksheet into a standard format for matching with REDcap. It:</p><ol>
+<li><p>Replaces square brackets and curly braces with parentheses</p></li>
+<li><p>Removes parenthetic expressions</p></li>
+<li><p>Removes ordinal and numeric expressions</p></li>
+<li><p>Converts <code>NA</code>s to text (for the next function)</p></li>
+<li><p>Passes the intermediate to
+<code><a href='https://rdrr.io/pkg/janitor/man/make_clean_names.html'>
+      make_clean_names(
+        case = "title",
+        use_make_names = FALSE,
+        transliterations = c("Any-Latin", "Latin-ASCII"),
+        sep_out = " "
+      )
+    </a></code></p></li>
+<li><p>Removes leading and trailing dashes</p></li>
+<li><p>Removes extraneous whitespace</p></li>
+<li><p>Inverts converted <code>NA</code>s (back to <code>NA_character_</code>)</p></li>
+</ol>
+
     </div>
 
-    <pre class="usage"><span class='fu'>asg_calc_schedules</span><span class='op'>(</span><span class='va'>.data</span>, date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>asg_std_names</span><span class='op'>(</span><span class='va'>string</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
-      <td><p>The output of <code>asg_join_nights_weekends()</code></p></td>
-    </tr>
-    <tr>
-      <th>date</th>
-      <td><p>The date to use when checking whether investigators are scheduled</p></td>
+      <th>string</th>
+      <td><p>A character vector containing investigator names</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>tibble</code> with columns <code>team</code>, <code>member</code>, and <code>scheduled</code></p>
+    <p>The input <code>string</code> with cleaned names</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Case Assignment: 
 <code><a href='asg_add_nights_weekends_schedules.html'>asg_add_nights_weekends_schedules</a>()</code>,
+<code><a href='asg_calc_schedules.html'>asg_calc_schedules</a>()</code>,
 <code><a href='asg_join_schedules.html'>asg_join_schedules</a>()</code>,
 <code><a href='asg_load_nights_weekends.html'>asg_load_nights_weekends</a>()</code>,
 <code><a href='asg_load_teams.html'>asg_load_teams</a>()</code>,
 <code><a href='asg_parse_nights_weekends.html'>asg_parse_nights_weekends</a>()</code>,
 <code><a href='asg_schedule_predefined.html'>asg_schedule_predefined</a>()</code>,
-<code><a href='asg_schedule.html'>asg_schedule</a>()</code>,
-<code><a href='asg_std_names.html'>asg_std_names</a>()</code></p></div>
+<code><a href='asg_schedule.html'>asg_schedule</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

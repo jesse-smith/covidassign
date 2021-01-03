@@ -34,9 +34,6 @@
     <loc>https://jesse-smith.github.io/covidassign//reference/asg_load_teams.html</loc>
   </url>
   <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/asg_parse_names.html</loc>
-  </url>
-  <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/asg_parse_nights_weekends.html</loc>
   </url>
   <url>
@@ -49,7 +46,16 @@
     <loc>https://jesse-smith.github.io/covidassign//reference/asg_schedule_predefined.html</loc>
   </url>
   <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/asg_std_names.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/magrittr-helpers.html</loc>
+  </url>
+  <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/parse_weekday.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/reexports.html</loc>
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/str_invert_na.html</loc>
@@ -71,5 +77,8 @@
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/team_schedules.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/tidyeval-data.html</loc>
   </url>
 </urlset>
