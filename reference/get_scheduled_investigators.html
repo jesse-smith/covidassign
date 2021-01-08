@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse Weekdays to Match Full Weekday Names — parse_weekday • covidassign</title>
+<title>Get Investigators Scheduled to Work on a Given Date — get_scheduled_investigators • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,15 +39,9 @@
 
 
 
-<meta property="og:title" content="Parse Weekdays to Match Full Weekday Names — parse_weekday" />
-<meta property="og:description" content="parse_weekday() takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name.
-parse_weekday() takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name." />
+<meta property="og:title" content="Get Investigators Scheduled to Work on a Given Date — get_scheduled_investigators" />
+<meta property="og:description" content="get_scheduled_investigators() parses scheduling files and returns
+investigators scheduled to work on date." />
 
 
 
@@ -115,39 +109,59 @@ letter, it matches the first two letters to the full day name." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse Weekdays to Match Full Weekday Names</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/parse_weekday.R'><code>R/parse_weekday.R</code></a>, <a href='https://github.com/jesse-smith/covidassign/blob/master/R/std_names.R'><code>R/std_names.R</code></a></small>
-    <div class="hidden name"><code>parse_weekday.Rd</code></div>
+    <h1>Get Investigators Scheduled to Work on a Given Date</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/get_scheduled_investigators.R'><code>R/get_scheduled_investigators.R</code></a></small>
+    <div class="hidden name"><code>get_scheduled_investigators.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>parse_weekday()</code> takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name.</p>
-<p><code>parse_weekday()</code> takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name.</p>
+    <p><code>get_scheduled_investigators()</code> parses scheduling files and returns
+investigators scheduled to work on <code>date</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_weekday</span><span class='op'>(</span><span class='va'>day</span><span class='op'>)</span>
-
-<span class='fu'>parse_weekday</span><span class='op'>(</span><span class='va'>day</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_scheduled_investigators</span><span class='op'>(</span>
+  date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>,
+  path_teams <span class='op'>=</span> <span class='fu'>path_create</span><span class='op'>(</span><span class='st'>"V:/Administration/Schedules/Investigation Staff Schedule"</span>,
+    ext <span class='op'>=</span> <span class='st'>"xlsx"</span><span class='op'>)</span>,
+  path_nights_weekends <span class='op'>=</span> <span class='fu'>path_create</span><span class='op'>(</span><span class='st'>"V:/Administration/Schedules/Night&amp;Weekend staff"</span>,
+    ext <span class='op'>=</span> <span class='st'>"xlsx"</span><span class='op'>)</span>,
+  team_schedules <span class='op'>=</span> <span class='va'>team_schedules</span>,
+  scheduled_only <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>day</th>
-      <td><p>A character vector of day names or abbreviations</p></td>
+      <th>date</th>
+      <td><p>The date to use when checking whether investigators are scheduled</p></td>
+    </tr>
+    <tr>
+      <th>path_teams</th>
+      <td><p>The location of the teams scheduling Excel workbook
+data</p></td>
+    </tr>
+    <tr>
+      <th>path_nights_weekends</th>
+      <td><p>The location of the nights and weekends
+scheduling Excel workbook</p></td>
+    </tr>
+    <tr>
+      <th>team_schedules</th>
+      <td><p>A <code>tibble</code> containing information for parsing schedules
+into dates; the default is the built-in <code>team_schedules</code> dataset and should
+probably not be changed</p></td>
+    </tr>
+    <tr>
+      <th>scheduled_only</th>
+      <td><p>Should only scheduled investigators be returned? If
+<code>FALSE</code>, all investigators will be returned. Useful for debugging.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector of full day names</p>
-<p>A character vector of full day names</p>
+    <p>A <code>tibble</code> containing <code>team</code>, <code>investigator</code>, and <code>scheduled</code> columns</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

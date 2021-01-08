@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse Weekdays to Match Full Weekday Names — parse_weekday • covidassign</title>
+<title>Parse and Re-Shape Nights and Weekends Scheduling Data — parse_nights_weekends • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,15 +39,9 @@
 
 
 
-<meta property="og:title" content="Parse Weekdays to Match Full Weekday Names — parse_weekday" />
-<meta property="og:description" content="parse_weekday() takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name.
-parse_weekday() takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name." />
+<meta property="og:title" content="Parse and Re-Shape Nights and Weekends Scheduling Data — parse_nights_weekends" />
+<meta property="og:description" content="parse_nights_weekends() parses night/weekend schedules into a standard
+format for case assignment." />
 
 
 
@@ -115,39 +109,46 @@ letter, it matches the first two letters to the full day name." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse Weekdays to Match Full Weekday Names</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/parse_weekday.R'><code>R/parse_weekday.R</code></a>, <a href='https://github.com/jesse-smith/covidassign/blob/master/R/std_names.R'><code>R/std_names.R</code></a></small>
-    <div class="hidden name"><code>parse_weekday.Rd</code></div>
+    <h1>Parse and Re-Shape Nights and Weekends Scheduling Data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/parse_nights_weekends.R'><code>R/parse_nights_weekends.R</code></a></small>
+    <div class="hidden name"><code>parse_nights_weekends.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>parse_weekday()</code> takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name.</p>
-<p><code>parse_weekday()</code> takes a vector of weekday abbreviations and returns the
-full name of each weekday. If the abbreviation is one letter, it matches the
-standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-letter, it matches the first two letters to the full day name.</p>
+    <p><code>parse_nights_weekends()</code> parses night/weekend schedules into a standard
+format for case assignment.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parse_weekday</span><span class='op'>(</span><span class='va'>day</span><span class='op'>)</span>
-
-<span class='fu'>parse_weekday</span><span class='op'>(</span><span class='va'>day</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>parse_nights_weekends</span><span class='op'>(</span><span class='va'>.data</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>day</th>
-      <td><p>A character vector of day names or abbreviations</p></td>
+      <th>.data</th>
+      <td><p>Data read by
+<code>
+  <a href='load_nights_weekends.html'>load_nights_weekends()</a>
+  </code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector of full day names</p>
-<p>A character vector of full day names</p>
+    <p>A <code>tibble</code> with one row per investigator and columns named <code>member</code>
+and <code>schedule</code>; the latter is a list-column containing named logical
+vectors of the weekly schedules for each investigator</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Case Assignment: 
+<code><a href='add_nights_weekends_schedules.html'>add_nights_weekends_schedules</a>()</code>,
+<code><a href='calc_schedules.html'>calc_schedules</a>()</code>,
+<code><a href='join_schedules.html'>join_schedules</a>()</code>,
+<code><a href='load_nights_weekends.html'>load_nights_weekends</a>()</code>,
+<code><a href='load_teams.html'>load_teams</a>()</code>,
+<code><a href='schedule_predefined.html'>schedule_predefined</a>()</code>,
+<code><a href='schedule.html'>schedule</a>()</code>,
+<code><a href='std_names.html'>std_names</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
