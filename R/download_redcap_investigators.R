@@ -1,6 +1,6 @@
 #' Download Investigators Listed in the Case Assignment REDcap Project
 #'
-#' `asg_download_redcap_investigators()` downloads all investigators available
+#' `download_redcap_investigators()` downloads all investigators available
 #' for assignment in the \strong{Case Assignment} REDcap project, as well as the
 #' `id` assigned to each investigator in REDcap.
 #'
@@ -11,7 +11,7 @@
 #'   and `investigator` (name)
 #'
 #' @export
-asg_download_redcap_investigators <- function(
+download_redcap_investigators <- function(
   api_token = Sys.getenv("redcap_CA_token")
 ) {
   # URL base for API
@@ -44,6 +44,6 @@ asg_download_redcap_investigators <- function(
       sep = "[,] "
     ) %>%
     dplyr::mutate(
-      investigator = asg_std_names(.data[["investigator"]])
+      investigator = std_names(.data[["investigator"]])
     )
 }

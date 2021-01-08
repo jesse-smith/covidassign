@@ -1,9 +1,9 @@
 #' Get Investigators Scheduled to Work on a Given Date
 #'
-#' `asg_get_scheduled_investigators()` parses scheduling files and returns
+#' `get_scheduled_investigators()` parses scheduling files and returns
 #' investigators scheduled to work on `date`.
 #'
-#' @inheritParams asg_calc_schedules
+#' @inheritParams calc_schedules
 #'
 #' @param path_teams The location of the teams scheduling Excel workbook
 #'   data
@@ -21,7 +21,7 @@
 #' @return A `tibble` containing `team`, `investigator`, and `scheduled` columns
 #'
 #' @export
-asg_get_scheduled_investigators <- function(
+get_scheduled_investigators <- function(
   date = Sys.Date(),
   path_teams = path_create(
     "V:/Administration/Schedules/Investigation Staff Schedule",
@@ -35,10 +35,10 @@ asg_get_scheduled_investigators <- function(
   scheduled_only = TRUE
 ) {
   rlang::inform("Loading teams...")
-  asg_load_teams(path = path_teams) %>%
-    asg_parse_teams() %>%
-    asg_join_schedules(schedules = team_schedules) %>%
-    asg_add_nights_weekends_schedules(path = path_nights_weekends) %>%
+  load_teams(path = path_teams) %>%
+    parse_teams() %>%
+    join_schedules(schedules = team_schedules) %>%
+    add_nights_weekends_schedules(path = path_nights_weekends) %>%
     dplyr::mutate(
       null_cycle = purrr::map_lgl(.data[["cycle"]], ~ is.null(.x))
     ) %>%
@@ -47,7 +47,7 @@ asg_get_scheduled_investigators <- function(
       !(.data[["schedule"]] == "nights-weekends" & .data[["null_cycle"]])
     ) %>%
     dplyr::select(-"null_cycle") %>%
-    asg_calc_schedules(date = date) %>%
+    calc_schedules(date = date) %>%
     dplyr::rename(investigator = .data[["member"]]) %>%
     purrr::when(
       scheduled_only ~ dplyr::filter(., .data[["scheduled"]]),

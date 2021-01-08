@@ -1,10 +1,10 @@
 #' Join Nights and Weekends Schedules to Teams Data
 #'
-#' `asg_add_nights_weekends_schedules()` loads individual schedules for
+#' `add_nights_weekends_schedules()` loads individual schedules for
 #' investigators on night or weekend shifts and joins them with the output of
-#' `asg_join_schedules()`.
+#' `join_schedules()`.
 #'
-#' @inheritParams asg_load_nights_weekends
+#' @inheritParams load_nights_weekends
 #'
 #' @param .data The output of `as_join_schedules()`
 #'
@@ -13,7 +13,7 @@
 #' @family Case Assignment
 #'
 #' @export
-asg_add_nights_weekends_schedules <- function(
+add_nights_weekends_schedules <- function(
   .data,
   path = path_create(
     "V:/Administration/Schedules/Night&Weekend staff",
@@ -23,11 +23,11 @@ asg_add_nights_weekends_schedules <- function(
 ) {
 
   nights_weekends_schedules <- path %>%
-    asg_load_nights_weekends(
+    load_nights_weekends(
       sheet = sheet,
       clean_names = TRUE
     ) %>%
-    asg_parse_nights_weekends()
+    parse_nights_weekends()
 
   nights_weekends_teams <- .data %>%
     dplyr::filter(.data[["schedule"]] == "nights-weekends")

@@ -1,6 +1,6 @@
 #' Download Cases from Case Assignment REDcap Project
 #'
-#' `asg_download_redcap_cases()` downloads records from the
+#' `download_redcap_cases()` downloads records from the
 #' \strong{Case Assignment} REDcap project. If `incl_assigned = FALSE`, it only
 #' downloads unassigned cases; if `incl_assigned = TRUE`, it downloads all
 #' cases.
@@ -11,9 +11,9 @@
 #' @param unassigned_only Should only unassigned cases be downloaded?
 #'
 #' @return A tidy `tibble` with all variables in `character` format
-asg_download_redcap_cases <- function(
+download_redcap_cases <- function(
   api_token = Sys.getenv("redcap_CA_token"),
-  unassigned_only = FALSE
+  unassigned_only = TRUE
 ) {
 
   # URL base for API

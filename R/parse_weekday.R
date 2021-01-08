@@ -16,7 +16,7 @@ parse_weekday <- function(day) {
 
   vctrs::vec_assert(day, ptype = character())
 
-  day <- asg_std_names(day)
+  day <- std_names(day)
 
   day_len_1 <- stringr::str_length(day) == 1L
 

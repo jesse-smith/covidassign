@@ -1,7 +1,7 @@
-#' @rdname asg_schedule
+#' @rdname schedule
 #'
 #' @export
-asg_schedule_by_day <- function(
+schedule_by_day <- function(
   cycle = c(
     Sun = FALSE,
     Mon = TRUE,

@@ -1,6 +1,6 @@
 #' Parse Investigator Names and Remove (Most) Non-Alphabetical Characters
 #'
-#' `asg_std_names()` parses investigator names given in the teams
+#' `std_names()` parses investigator names given in the teams
 #' worksheet into a standard format for matching with REDcap. It:
 #' \enumerate{
 #'   \item Replaces square brackets and curly braces with parentheses
@@ -28,7 +28,7 @@
 #' @family Case Assignment
 #'
 #' @export
-asg_std_names <- function(string) {
+std_names <- function(string) {
   string %>%
     str_replace_brackets() %>%
     str_replace_braces() %>%
@@ -199,7 +199,7 @@ parse_weekday <- function(day) {
 
   vctrs::vec_assert(day, ptype = character())
 
-  day <- asg_std_names(day)
+  day <- std_names(day)
 
   day_len_1 <- stringr::str_length(day) == 1L
 

@@ -1,11 +1,11 @@
 #' Calculate Whether Investigators Are Working on a Given Date
 #'
-#' `asg_calc_schedules()` takes the output of
-#' `asg_add_nights_weekends_schedules()` and calcuates whether investigators are
+#' `calc_schedules()` takes the output of
+#' `add_nights_weekends_schedules()` and calcuates whether investigators are
 #' scheduled to work on `date`. Either a predefined schedule or a custom
 #' schedule must be supplied for every investigator.
 #'
-#' @param .data The output of `asg_join_nights_weekends()`
+#' @param .data The output of `join_nights_weekends()`
 #'
 #' @param date The date to use when checking whether investigators are scheduled
 #'
@@ -14,8 +14,8 @@
 #' @family Case Assignment
 #'
 #' @export
-asg_calc_schedules <- function(.data, date = Sys.Date()) {
-  # Convert to arguments expected by `asg_schedule_predefined()`
+calc_schedules <- function(.data, date = Sys.Date()) {
+  # Convert to arguments expected by `schedule_predefined()`
   data_predefined <- .data %>%
     dplyr::mutate(
       schedule_predefined = .data[["schedule"]] %>%
@@ -31,7 +31,7 @@ asg_calc_schedules <- function(.data, date = Sys.Date()) {
       scheduled = data_predefined %>%
         dplyr::select("schedule_predefined", "anchor", "cycle") %>%
         purrr::pmap_lgl(
-          ~ asg_schedule_predefined(
+          ~ schedule_predefined(
             schedule = ..1,
             start = date,
             end = date + 1L,

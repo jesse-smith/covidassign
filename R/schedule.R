@@ -1,6 +1,6 @@
 #' Define Rotating or Weekly Work Schedules
 #'
-#' `asg_schedule()` defines work schedules based off of a given `cycle`. If this
+#' `schedule()` defines work schedules based off of a given `cycle`. If this
 #' cycle is named, it is assumed that the names are days of the week, and that
 #' the schedule repeats weekly. If it is unnamed, the `cycle` begins at the
 #' `anchor` date. Defining rotating weekly schedules
@@ -8,7 +8,7 @@
 #' names; these schedules may be defined as a rotating schedule anchored to the
 #' beginning of a week.
 #'
-#' `asg_schedule_by_cycle()` and `asg_schedule_by_day()` are the workhorses
+#' `schedule_by_cycle()` and `schedule_by_day()` are the workhorses
 #' underlying `as_schedule()`. They handle the general cyclic and weekly use
 #' cases described above.
 #'
@@ -34,10 +34,10 @@
 #'
 #' @family Case Assignment
 #'
-#' @aliases asg_schedule_by_cycle asg_schedule_by_day
+#' @aliases schedule_by_cycle schedule_by_day
 #'
 #' @export
-asg_schedule <- function(
+schedule <- function(
   cycle = c(
     Sun = FALSE,
     Mon = TRUE,
@@ -59,13 +59,13 @@ asg_schedule <- function(
   anchor <- anchor %>% std_dates() %>% lubridate::as_date()
 
   if (cycle_is_named) {
-    asg_schedule_by_day(
+    schedule_by_day(
       cycle = cycle,
       start = start,
       end = end
     )
   } else {
-    asg_schedule_by_cycle(
+    schedule_by_cycle(
       cycle = cycle,
       start = start,
       end = end,

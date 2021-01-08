@@ -1,6 +1,6 @@
 #' Load Night & Weekend Scheduling Data
 #'
-#' `asg_load_nights_weekends()` loads schedules for investigators working nights
+#' `load_nights_weekends()` loads schedules for investigators working nights
 #' and weekends. These team members do not follow a team-wide schedule and must
 #' be dealt with individually.
 #'
@@ -16,7 +16,7 @@
 #' @family Case Assignment
 #'
 #' @export
-asg_load_nights_weekends <- function(
+load_nights_weekends <- function(
   path = path_create(
     "V:/Administration/Schedules/Night&Weekend staff",
     ext = "xlsx"

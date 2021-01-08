@@ -1,11 +1,11 @@
 #' Parse and Re-Shape Nights and Weekends Scheduling Data
 #'
-#' `asg_parse_nights_weekends()` parses night/weekend schedules into a standard
+#' `parse_nights_weekends()` parses night/weekend schedules into a standard
 #' format for case assignment.
 #'
 #' @param .data Data read by
 #'   \code{
-#'   \link[covidassign:asg_load_nights_weekends]{asg_load_nights_weekends()}
+#'   \link[covidassign:load_nights_weekends]{load_nights_weekends()}
 #'   }
 #'
 #' @return A `tibble` with one row per investigator and columns named `member`
@@ -15,13 +15,13 @@
 #' @family Case Assignment
 #'
 #' @export
-asg_parse_nights_weekends <- function(.data) {
+parse_nights_weekends <- function(.data) {
   .data %>%
-    dplyr::mutate(role = asg_std_names(.data[["role"]])) %>%
+    dplyr::mutate(role = std_names(.data[["role"]])) %>%
     dplyr::filter(.data[["role"]] == "Investigator") %>%
     dplyr::select(-c("role", "schedule", "notes")) %>%
     dplyr::mutate(
-      member = asg_std_names(.data[["member"]]),
+      member = std_names(.data[["member"]]),
       dplyr::across(!"member", ~ !is.na(.x))
     ) %>%
     tidyr::pivot_longer(
