@@ -23,22 +23,16 @@
 #' @export
 get_scheduled_investigators <- function(
   date = Sys.Date(),
-  path_teams = path_create(
-    "V:/Administration/Schedules/Investigation Staff Schedule",
-    ext = "xlsx"
-  ),
-  path_nights_weekends = path_create(
-    "V:/Administration/Schedules/Night&Weekend staff",
-    ext = "xlsx"
-  ),
+  path_tm = path_teams(),
+  path_nw = path_nights_weekends(),
   team_schedules = team_schedules,
   scheduled_only = TRUE
 ) {
   rlang::inform("Loading teams...")
-  load_teams(path = path_teams) %>%
+  load_teams(path = path_tm) %>%
     parse_teams() %>%
     join_schedules(schedules = team_schedules) %>%
-    add_nights_weekends_schedules(path = path_nights_weekends) %>%
+    add_nights_weekends_schedules(path = path_nw) %>%
     dplyr::mutate(
       null_cycle = purrr::map_lgl(.data[["cycle"]], ~ is.null(.x))
     ) %>%

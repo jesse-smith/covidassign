@@ -24,8 +24,8 @@ assign_cases <- function(
   investigators <- join_investigators(date = date, api_token = api_token)
 
   # Get number of unassigned cases and investigators
-  n_cases <- vctrs::vec_size(cases)
-  n_investigators <- vctrs::vec_size(investigators)
+  n_cases <- vec_size(cases)
+  n_investigators <- vec_size(investigators)
 
   # Get number of investigators needed
   n_reps <- n_cases %/% n_investigators
@@ -33,7 +33,7 @@ assign_cases <- function(
 
   # Create randomized vector of investigator assignments
   investigator_ids <- investigators %>%
-    vctrs::vec_rep(times = n_reps) %>%
+    vec_rep(times = n_reps) %>%
     dplyr::bind_rows(dplyr::slice_sample(investigators, n = n_additional)) %>%
     dplyr::slice_sample(prop = 1L) %>%
     dplyr::pull("id")

@@ -41,5 +41,5 @@ download_redcap_cases <- function(
     httr::content(as = "text") %>%
     jsonlite::fromJSON() %>%
     dplyr::as_tibble() %>%
-    dplyr::select(-"six")
+    dplyr::select(-dplyr::matches("^six$"))
 }

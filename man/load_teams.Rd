@@ -4,11 +4,7 @@
 \alias{load_teams}
 \title{Load the Current Investigator Team Assignments}
 \usage{
-load_teams(
-  path = path_create("V:/Administration/Schedules/Investigation Staff Schedule", ext =
-    "xlsx"),
-  clean_names = TRUE
-)
+load_teams(path = path_teams(), clean_names = TRUE)
 }
 \arguments{
 \item{path}{The path to the Excel workbook containing team membership data}

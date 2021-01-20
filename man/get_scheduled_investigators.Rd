@@ -6,10 +6,8 @@
 \usage{
 get_scheduled_investigators(
   date = Sys.Date(),
-  path_teams = path_create("V:/Administration/Schedules/Investigation Staff Schedule",
-    ext = "xlsx"),
-  path_nights_weekends = path_create("V:/Administration/Schedules/Night&Weekend staff",
-    ext = "xlsx"),
+  path_tm = path_teams(),
+  path_nw = path_nights_weekends(),
   team_schedules = team_schedules,
   scheduled_only = TRUE
 )
@@ -17,18 +15,18 @@ get_scheduled_investigators(
 \arguments{
 \item{date}{The date to use when checking whether investigators are scheduled}
 
-\item{path_teams}{The location of the teams scheduling Excel workbook
-data}
-
-\item{path_nights_weekends}{The location of the nights and weekends
-scheduling Excel workbook}
-
 \item{team_schedules}{A \code{tibble} containing information for parsing schedules
 into dates; the default is the built-in \code{team_schedules} dataset and should
 probably not be changed}
 
 \item{scheduled_only}{Should only scheduled investigators be returned? If
 \code{FALSE}, all investigators will be returned. Useful for debugging.}
+
+\item{path_teams}{The location of the teams scheduling Excel workbook
+data}
+
+\item{path_nights_weekends}{The location of the nights and weekends
+scheduling Excel workbook}
 }
 \value{
 A \code{tibble} containing \code{team}, \code{investigator}, and \code{scheduled} columns

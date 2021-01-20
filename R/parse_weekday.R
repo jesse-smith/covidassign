@@ -14,7 +14,7 @@
 #' @export
 parse_weekday <- function(day) {
 
-  vctrs::vec_assert(day, ptype = character())
+  vec_assert(day, ptype = character())
 
   day <- std_names(day)
 

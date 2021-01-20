@@ -15,7 +15,7 @@ parse_teams <- function(.data) {
   .data %>%
     # Find rows with investigator names
     dplyr::mutate(
-      row = vctrs::vec_seq_along(.),
+      row = vec_seq_along(.),
       inv_role = tidyr::replace_na(.data[["role"]] == "Investigators", FALSE),
       inv_start_row = .data[["row"]][.data[["inv_role"]]],
       .before = 1L

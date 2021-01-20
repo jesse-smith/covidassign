@@ -15,10 +15,7 @@
 #' @export
 add_nights_weekends_schedules <- function(
   .data,
-  path = path_create(
-    "V:/Administration/Schedules/Night&Weekend staff",
-    ext = "xlsx"
-  ),
+  path = path_nights_weekends(),
   sheet = "schedules"
 ) {
 

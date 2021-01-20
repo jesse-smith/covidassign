@@ -16,7 +16,7 @@ schedule_by_day <- function(
 ) {
 
   # Check that `days` is a logical with a potential value for each weekday
-  vctrs::vec_assert(cycle, ptype = logical(), size = 7L)
+  vec_assert(cycle, ptype = logical(), size = 7L)
 
   # Check that `days` is a named vector
   days_are_named <- cycle %>%
@@ -53,7 +53,7 @@ schedule_by_day <- function(
   }
 
   # Check that an entry is present for each weekday
-  day_names_are_unique <- vctrs::vec_unique_count(day_names)
+  day_names_are_unique <- vec_unique_count(day_names)
 
   if (!day_names_are_unique) {
     rlang::abort(

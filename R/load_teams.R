@@ -18,10 +18,7 @@
 #'
 #' @export
 load_teams <- function(
-  path = path_create(
-    "V:/Administration/Schedules/Investigation Staff Schedule",
-    ext = "xlsx"
-  ),
+  path = path_teams(),
   clean_names = TRUE
 ) {
 
