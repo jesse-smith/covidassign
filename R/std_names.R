@@ -187,7 +187,7 @@ str_trim_dashes <- function(string) {
 #' \code{\link[stringr:str_replace_na]{str_replace_na()}}; that is, it converts
 #' replaced `NA` values back to `NA_character_`. This only works if `NA` is
 #' replaced with `"NA"` or a case-wise variant thereof (i.e. `"Na"`, `"na"`, or
-#' `"nA"`). It is designed to invert the addition of "`_[0-9]`" suffixes as
+#' `"nA"`). It is designed to invert the addition of "`_[0-9]+`" suffixes as
 #' well.
 #'
 #' @param string A character vector
