@@ -1,6 +1,6 @@
 #' Load the Current Investigator Team Assignments
 #'
-#' `load_teams()` loads the current investigators on each team start an
+#' `sched_load_teams()` loads the current investigators on each team start an
 #' Excel file. It is mostly a wrapper around
 #' \code{\link[readxl:read_excel]{read_excel()}}, If `clean_names = TRUE`,
 #' it also standardizes names with
@@ -17,7 +17,7 @@
 #' @family Case Assignment
 #'
 #' @export
-load_teams <- function(
+sched_load_teams <- function(
   path = path_teams(),
   clean_names = TRUE
 ) {

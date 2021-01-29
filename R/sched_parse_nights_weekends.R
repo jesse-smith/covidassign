@@ -1,11 +1,11 @@
 #' Parse and Re-Shape Nights and Weekends Scheduling Data
 #'
-#' `parse_nights_weekends()` parses night/weekend schedules into a standard
+#' `sched_parse_nights_weekends()` parses night/weekend schedules into a standard
 #' format for case assignment.
 #'
 #' @param .data Data read by
 #'   \code{
-#'   \link[covidassign:load_nights_weekends]{load_nights_weekends()}
+#'   \link[covidassign:sched_load_nights_weekends]{sched_load_nights_weekends()}
 #'   }
 #'
 #' @return A `tibble` with one row per investigator and columns named `member`
@@ -15,13 +15,13 @@
 #' @family Case Assignment
 #'
 #' @export
-parse_nights_weekends <- function(.data) {
+sched_parse_nights_weekends <- function(.data) {
   .data %>%
-    dplyr::mutate(role = std_names(.data[["role"]])) %>%
+    dplyr::mutate(role = sched_std_names(.data[["role"]])) %>%
     dplyr::filter(.data[["role"]] == "Investigator") %>%
     dplyr::select(-c("role", "schedule", "notes")) %>%
     dplyr::mutate(
-      member = std_names(.data[["member"]]),
+      member = sched_std_names(.data[["member"]]),
       dplyr::across(!"member", ~ !is.na(.x))
     ) %>%
     tidyr::pivot_longer(
@@ -29,7 +29,7 @@ parse_nights_weekends <- function(.data) {
       names_to = "weekday",
       values_to = "scheduled"
     ) %>%
-    dplyr::mutate(weekday = parse_weekday(.data[["weekday"]])) %>%
+    dplyr::mutate(weekday = sched_parse_weekday(.data[["weekday"]])) %>%
     dplyr::group_by(.data[["member"]]) %>%
     dplyr::summarize(
       schedule = list(

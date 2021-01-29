@@ -6,7 +6,7 @@
 #' another round of even distribution. Any remaining cases are assigned randomly
 #' with at most one additional case given to an investigator.
 #'
-#' @inheritParams join_investigators
+#' @inheritParams get_investigators
 #'
 #' @return A `tibble` containing the results of
 #'   \code{
@@ -21,7 +21,7 @@ assign_cases <- function(
 ) {
 
   cases <- download_redcap_cases(api_token = api_token)
-  investigators <- join_investigators(date = date, api_token = api_token)
+  investigators <- get_investigators(date = date, api_token = api_token)
 
   # Get number of unassigned cases and investigators
   n_cases <- vec_size(cases)

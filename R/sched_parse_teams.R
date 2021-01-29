@@ -1,17 +1,17 @@
 #' Parse the Team Schedule Workbook to Standardized Format
 #'
-#' `parse_teams()` parses the data returned from `load_teams()` into
+#' `sched_parse_teams()` parses the data returned from `sched_load_teams()` into
 #' a standard format, with one column per team and one row per individual.
 #'
-#' @param .data The teams data read by `load_teams()`
+#' @param .data The teams data read by `sched_load_teams()`
 #'
 #' @return A `tibble` containing one column for each team (named with that
 #' team's letter designation) and one row per team member. Team member names
 #' are standardized with
-#' \code{\link[covidassign:std_names]{parse_names()}}.
+#' \code{\link[covidassign:sched_std_names]{sched_std_names()}}.
 #'
 #' @export
-parse_teams <- function(.data) {
+sched_parse_teams <- function(.data) {
   .data %>%
     # Find rows with investigator names
     dplyr::mutate(
@@ -28,6 +28,6 @@ parse_teams <- function(.data) {
     janitor::remove_empty(which = "rows") %>%
     # Parse investigator names
     dplyr::mutate(
-      dplyr::across(dplyr::everything(), ~ std_names(.x))
+      dplyr::across(dplyr::everything(), ~ sched_std_names(.x))
     )
 }

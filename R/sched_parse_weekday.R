@@ -1,9 +1,9 @@
 #' Parse Weekdays to Match Full Weekday Names
 #'
-#' `parse_weekday()` takes a vector of weekday abbreviations and returns the
-#' full name of each weekday. If the abbreviation is one letter, it matches the
-#' standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than one
-#' letter, it matches the first two letters to the full day name.
+#' `sched_parse_weekday()` takes a vector of weekday abbreviations and returns
+#' the full name of each weekday. If the abbreviation is one letter, it matches
+#' the standard one-letter weekday abbreviations (U/M/T/W/R/F/S). If more than
+#' one letter, it matches the first two letters to the full day name.
 #'
 #' @param day A character vector of day names or abbreviations
 #'
@@ -12,11 +12,11 @@
 #' @keywords internal
 #'
 #' @export
-parse_weekday <- function(day) {
+sched_parse_weekday <- function(day) {
 
   vec_assert(day, ptype = character())
 
-  day <- std_names(day)
+  day <- sched_std_names(day)
 
   day_len_1 <- stringr::str_length(day) == 1L
 

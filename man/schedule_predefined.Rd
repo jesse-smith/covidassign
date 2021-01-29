@@ -37,7 +37,8 @@ is needed. It must be either a string in "YYYY-MM-DD" format or a
 \code{Date} object.}
 
 \item{cycle}{A logical vector defining one scheduling cycle. If named, names
-are passed to \code{\link[covidassign:parse_weekday]{parse_weekday()}} for
+are passed to
+\code{\link[covidassign:sched_parse_weekday]{sched_parse_weekday()}} for
 standardization of weekday names.}
 }
 \value{
@@ -77,13 +78,13 @@ that function for implementing other schedules.
 }
 \seealso{
 Other Case Assignment: 
-\code{\link{add_nights_weekends_schedules}()},
-\code{\link{calc_schedules}()},
-\code{\link{join_schedules}()},
-\code{\link{load_nights_weekends}()},
-\code{\link{load_teams}()},
-\code{\link{parse_nights_weekends}()},
-\code{\link{schedule}()},
-\code{\link{std_names}()}
+\code{\link{sched_add_nights_weekends}()},
+\code{\link{sched_calc}()},
+\code{\link{sched_join_schedules}()},
+\code{\link{sched_load_nights_weekends}()},
+\code{\link{sched_load_teams}()},
+\code{\link{sched_parse_nights_weekends}()},
+\code{\link{sched_std_names}()},
+\code{\link{schedule}()}
 }
 \concept{Case Assignment}

@@ -13,7 +13,8 @@
 #' cases described above.
 #'
 #' @param cycle A logical vector defining one scheduling cycle. If named, names
-#'   are passed to \code{\link[covidassign:parse_weekday]{parse_weekday()}} for
+#'   are passed to
+#'   \code{\link[covidassign:sched_parse_weekday]{sched_parse_weekday()}} for
 #'   standardization of weekday names.
 #'
 #' @param start The start date of the returned schedule; either a string in

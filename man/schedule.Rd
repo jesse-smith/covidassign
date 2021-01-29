@@ -31,7 +31,8 @@ schedule_by_day(
 }
 \arguments{
 \item{cycle}{A logical vector defining one scheduling cycle. If named, names
-are passed to \code{\link[covidassign:parse_weekday]{parse_weekday()}} for
+are passed to
+\code{\link[covidassign:sched_parse_weekday]{sched_parse_weekday()}} for
 standardization of weekday names.}
 
 \item{start}{The start date of the returned schedule; either a string in
@@ -67,13 +68,13 @@ cases described above.
 }
 \seealso{
 Other Case Assignment: 
-\code{\link{add_nights_weekends_schedules}()},
-\code{\link{calc_schedules}()},
-\code{\link{join_schedules}()},
-\code{\link{load_nights_weekends}()},
-\code{\link{load_teams}()},
-\code{\link{parse_nights_weekends}()},
-\code{\link{schedule_predefined}()},
-\code{\link{std_names}()}
+\code{\link{sched_add_nights_weekends}()},
+\code{\link{sched_calc}()},
+\code{\link{sched_join_schedules}()},
+\code{\link{sched_load_nights_weekends}()},
+\code{\link{sched_load_teams}()},
+\code{\link{sched_parse_nights_weekends}()},
+\code{\link{sched_std_names}()},
+\code{\link{schedule_predefined}()}
 }
 \concept{Case Assignment}

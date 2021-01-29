@@ -18,11 +18,8 @@ std_addr <- function(x) {
       pattern = "[^a-zA-Z0-9-']",
       replacement = " "
     ) %>%
-    stringr::str_replace_all(pattern = "[']", replacement = "") %>%
-    stringr::str_replace_all(
-      pattern = "[\t\n\r ]*-[\t\n\r ]*",
-      replacement = "-"
-    ) %>%
+    stringr::str_remove_all(pattern = "[']+") %>%
+    stringr::str_replace_all(pattern = "\\s*[-]+\\s*", replacement = "-") %>%
     stringr::str_squish() %>%
-    stringr::str_to_upper()
+    stringi::stri_trans_totitle(locale = "en", type = "word")
 }

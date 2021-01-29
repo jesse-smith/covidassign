@@ -1,7 +1,7 @@
 #' Calculate Whether Investigators Are Working on a Given Date
 #'
-#' `calc_schedules()` takes the output of
-#' `add_nights_weekends_schedules()` and calcuates whether investigators are
+#' `sched_calc()` takes the output of
+#' `sched_add_nights_weekends()` and calcuates whether investigators are
 #' scheduled to work on `date`. Either a predefined schedule or a custom
 #' schedule must be supplied for every investigator.
 #'
@@ -14,7 +14,7 @@
 #' @family Case Assignment
 #'
 #' @export
-calc_schedules <- function(.data, date = Sys.Date()) {
+sched_calc <- function(.data, date = Sys.Date()) {
   # Convert to arguments expected by `schedule_predefined()`
   data_predefined <- .data %>%
     dplyr::mutate(

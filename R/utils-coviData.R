@@ -5,7 +5,7 @@
 #' otherwise be included in this package are loaded here.
 #'
 #' @importFrom coviData load_report_date path_create path_inv
-#'   path_pcr read_file_delim std_names std_dates
+#'   path_pcr read_file_delim std_dates
 #'
 #' @name utils-coviData
 NULL

@@ -35,7 +35,7 @@ schedule_by_day <- function(
   }
 
   # Standardize weekday names
-  day_names <- cycle %>% names() %>% parse_weekday()
+  day_names <- cycle %>% names() %>% sched_parse_weekday()
 
   # Check that all names are weekdays
   day_names_are_weekdays <- day_names %>%

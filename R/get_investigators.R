@@ -1,16 +1,16 @@
 #' Join Investigators Listed in Investigation Schedule & Case Assignment Project
 #'
-#' `join_investigators()` joins the investigators scheduled to work on
+#' `get_investigators()` joins the investigators scheduled to work on
 #' `date` with the list of investigators from the \strong{Case Assignment}
 #' REDcap project. By default, it performs an inner join, since only
 #' investigators in both lists are available for case assignment.
 #'
-#' While the default behavior is an inner join, `join_investigators()` can
+#' While the default behavior is an inner join, `get_investigators()` can
 #' also perform anti-joins with either the scheduled or REDcap investigator list
 #' as the primary table. This is useful for debugging and checking that all
 #' scheduled investigators are able to have cases assigned.
 #'
-#' @inheritParams get_scheduled_investigators
+#' @inheritParams sched_investigators
 #'
 #' @inheritParams download_redcap_investigators
 #'
@@ -25,7 +25,7 @@
 #'   column. If `type = "inner"`, an `id` column is also included.
 #'
 #' @export
-join_investigators <- function(
+get_investigators <- function(
   date = Sys.Date(),
   type = c("inner", "anti_schedule", "anti_redcap"),
   api_token = Sys.getenv("redcap_CA_token"),
@@ -36,7 +36,7 @@ join_investigators <- function(
 
   if (!quiet) rlang::inform("Loading investigators...")
   inv_scheduled <- suppressMessages(
-    get_scheduled_investigators(date = date)
+    sched_investigators(date = date)
   )
   inv_redcap <- suppressMessages(
     download_redcap_investigators(api_token = api_token)

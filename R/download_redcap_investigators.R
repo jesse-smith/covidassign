@@ -44,6 +44,6 @@ download_redcap_investigators <- function(
       sep = "[,] "
     ) %>%
     dplyr::mutate(
-      investigator = std_names(.data[["investigator"]])
+      investigator = sched_std_names(.data[["investigator"]])
     )
 }

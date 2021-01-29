@@ -1,6 +1,6 @@
 #' Parse Investigator Names and Remove (Most) Non-Alphabetical Characters
 #'
-#' `std_names()` parses investigator names given in the teams
+#' `sched_std_names()` parses investigator names given in the teams
 #' worksheet into a standard format for matching with REDcap. It:
 #' \enumerate{
 #'   \item Replaces square brackets and curly braces with parentheses
@@ -28,7 +28,7 @@
 #' @family Case Assignment
 #'
 #' @export
-std_names <- function(string) {
+sched_std_names <- function(string) {
   string %>%
     str_replace_brackets() %>%
     str_replace_braces() %>%
