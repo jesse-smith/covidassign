@@ -5,10 +5,11 @@
 \alias{schedule_weekdays}
 \alias{schedule_42}
 \alias{schedule_5623}
+\alias{schedule_526264}
 \title{Quickly Create Pre-Defined Work Schedules}
 \usage{
 schedule_predefined(
-  schedule = c("weekdays", "42", "5623", "custom"),
+  schedule = c("weekdays", "42", "5623", "526254", "custom"),
   start = Sys.Date(),
   end = start + 29L,
   anchor = start,
@@ -20,6 +21,8 @@ schedule_weekdays(start = Sys.Date(), end = start + 29L, anchor = start)
 schedule_42(start = Sys.Date(), end = Sys.Date() + 29L, anchor = start)
 
 schedule_5623(start = Sys.Date(), end = Sys.Date() + 29L, anchor = start)
+
+schedule_526264(start = Sys.Date(), end = Sys.Date() + 29L, anchor = start)
 }
 \arguments{
 \item{schedule}{A string indicating the schedule to use. For custom
@@ -61,13 +64,26 @@ schedules do not require an anchor point.
 
 \code{schedule_5623()} defines a rotating schedule with the following pattern:
 \itemize{
-\item 5 on, 2 off
-\item 5 on, 3 off
-\item 6 on, 2 off
-\item 6 on, 2 off
-\item 6 on, 2 off
-\item 6 on, 2 off
-\item 6 on, 3 off
+\item{5 on, 2 off}
+\item{5 on, 3 off}
+\item{6 on, 2 off}
+\item{6 on, 2 off}
+\item{6 on, 2 off}
+\item{6 on, 2 off}
+\item{6 on, 3 off}
+}
+
+\code{schedule_526264()} defines a rotating schedule with the following pattern:
+\itemize{
+\item{5 on, 2 off}
+\item{5 on, 2 off}
+\item{5 on, 2 off}
+\item{6 on, 2 off}
+\item{(repeat 4 more times...)}
+\item{5 on, 2 off}
+\item{5 on, 2 off}
+\item{5 on, 2 off}
+\item{5 on, 4 off}
 }
 }
 \details{

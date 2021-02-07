@@ -12,12 +12,11 @@
 #'
 #' @return A tidy `tibble` with all variables in `character` format
 download_redcap_cases <- function(
-  api_token = Sys.getenv("redcap_CA_token"),
-  unassigned_only = TRUE
+  api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
   # URL base for API
-  api_uri <- "https://redcap.health.tn.gov/redcap/api/"
+  api_uri <- "https://redcap.shelbycountytn.gov/api/"
 
   api_params <- list(
     token = api_token,
@@ -25,10 +24,6 @@ download_redcap_cases <- function(
     format = "json",
     type = "flat"
   )
-
-  if (unassigned_only) {
-    api_params <- c(api_params, filterLogic = "[investigator]=''")
-  }
 
   httr::RETRY(
     "POST",

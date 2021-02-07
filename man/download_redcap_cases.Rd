@@ -5,7 +5,7 @@
 \title{Download Cases from Case Assignment REDcap Project}
 \usage{
 download_redcap_cases(
-  api_token = Sys.getenv("redcap_CA_token"),
+  api_token = Sys.getenv("redcap_NCA_token"),
   unassigned_only = TRUE
 )
 }

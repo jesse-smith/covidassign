@@ -28,7 +28,8 @@ Imports:
     stringr,
     tidyr,
     vctrs,
-    fs
+    fs,
+    covidsms
 Suggests: 
     covr,
     testthat (>= 3.0.0),
@@ -38,3 +39,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Remotes:  
+    jesse-smith/covidsms

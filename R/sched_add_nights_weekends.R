@@ -30,11 +30,11 @@ sched_add_nights_weekends <- function(
     dplyr::filter(.data[["schedule"]] == "nights-weekends")
 
   # Join nights-weekends only for more informative message
-  dplyr::left_join(
+  tidylog::left_join(
     nights_weekends_teams,
     nights_weekends_schedules,
     by = "member",
-    suffix = c("", "_custom")
+    suffix = c("", "_nights_weekends")
   )
 
   # Join full data for output
@@ -42,7 +42,7 @@ sched_add_nights_weekends <- function(
     dplyr::left_join(
       nights_weekends_schedules,
       by = "member",
-      suffix = c("", "_custom")
+      suffix = c("", "_nights_weekends")
     ) %>%
-    dplyr::rename(cycle = .data[["schedule_custom"]])
+    dplyr::rename(cycle = .data[["schedule_nights_weekends"]])
 }

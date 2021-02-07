@@ -4,7 +4,11 @@
 \alias{upload_assignments}
 \title{Upload Assigned Cases to REDcap Case Assignment Project}
 \usage{
-upload_assignments(.data, api_token = Sys.getenv("redcap_CA_token"))
+upload_assignments(
+  .data,
+  api_token = Sys.getenv("redcap_NCA_token"),
+  limit = as.integer(0.9 * 3.2e+07)
+)
 }
 \arguments{
 \item{.data}{Assigned cases data}

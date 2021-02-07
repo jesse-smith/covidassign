@@ -5,19 +5,13 @@
 \title{Get Investigators Scheduled to Work on a Given Date}
 \usage{
 sched_investigators(
-  date = Sys.Date(),
-  path_tm = path_teams(),
-  path_nw = path_nights_weekends(),
-  team_schedules = team_schedules,
+  date = lubridate::today(),
+  team_sched = TRUE,
   scheduled_only = TRUE
 )
 }
 \arguments{
 \item{date}{The date to use when checking whether investigators are scheduled}
-
-\item{team_schedules}{A \code{tibble} containing information for parsing schedules
-into dates; the default is the built-in \code{team_schedules} dataset and should
-probably not be changed}
 
 \item{scheduled_only}{Should only scheduled investigators be returned? If
 \code{FALSE}, all investigators will be returned. Useful for debugging.}
@@ -27,6 +21,10 @@ data}
 
 \item{path_nights_weekends}{The location of the nights and weekends
 scheduling Excel workbook}
+
+\item{team_schedules}{A \code{tibble} containing information for parsing schedules
+into dates; the default is the built-in \code{team_schedules} dataset and should
+probably not be changed}
 }
 \value{
 A \code{tibble} containing \code{team}, \code{investigator}, and \code{scheduled} columns

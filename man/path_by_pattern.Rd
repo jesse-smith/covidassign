@@ -8,12 +8,12 @@
 \usage{
 path_teams(
   dir = "V:/Administration/Schedules/",
-  pattern = "(?i).*/[^/]*Investigations?[ ]*Staff[ ]*Schedule.*xlsx?$"
+  pattern = "(?i).*/[^/~]*Investigations?[ ]*Staff[ ]*Schedule.*xlsx?$"
 )
 
 path_nights_weekends(
   dir = "V:/Administration/Schedules/",
-  pattern = "(?i).*/[^/]*Nights?.*Weekends?[ ]*Staff.*xlsx?$"
+  pattern = "(?i).*/[^/~]*Nights?.*Weekends?[ ]*Staff.*xlsx?$"
 )
 
 path_by_pattern(dir, pattern)

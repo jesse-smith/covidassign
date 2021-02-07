@@ -3,9 +3,9 @@ team_schedules <- tibble::tribble(
   "a",        "weekdays", as.Date(NA),
   "b",        "weekdays", as.Date(NA),
   "c",        "weekdays", as.Date(NA),
-  "d",             "4-2", as.Date("2020-11-15"),
-  "e",             "4-2", as.Date("2020-11-14"),
-  "f",             "4-2", as.Date("2020-11-12"),
+  "d",     "5-2-6-2-5-4", as.Date("2021-06-01"),
+  "e",     "5-2-6-2-5-4", as.Date("2021-04-06"),
+  "f",     "5-2-6-2-5-4", as.Date("2020-02-09"),
   "g", "nights-weekends", as.Date(NA),
   "h", "nights-weekends", as.Date(NA)
 )

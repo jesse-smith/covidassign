@@ -3,7 +3,7 @@
 #' @export
 path_teams <- function(
   dir = "V:/Administration/Schedules/",
-  pattern = "(?i).*/[^/]*Investigations?[ ]*Staff[ ]*Schedule.*xlsx?$"
+  pattern = "(?i).*/[^/~]*Investigations?[ ]*Staff[ ]*Schedule.*xlsx?$"
 ) {
   path_by_pattern(dir = dir, pattern = pattern)
 }
@@ -13,7 +13,7 @@ path_teams <- function(
 #' @export
 path_nights_weekends <- function(
   dir = "V:/Administration/Schedules/",
-  pattern = "(?i).*/[^/]*Nights?.*Weekends?[ ]*Staff.*xlsx?$"
+  pattern = "(?i).*/[^/~]*Nights?.*Weekends?[ ]*Staff.*xlsx?$"
 ) {
   path_by_pattern(dir = dir, pattern = pattern)
 }

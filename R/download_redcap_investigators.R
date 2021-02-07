@@ -12,38 +12,23 @@
 #'
 #' @export
 download_redcap_investigators <- function(
-  api_token = Sys.getenv("redcap_CA_token")
+  api_token = Sys.getenv("redcap_NCA_token")
 ) {
-  # URL base for API
-  api_uri <- "https://redcap.health.tn.gov/redcap/api/"
-
-  api_params <- list(
-    token = api_token,
-    format = "json",
-    content = "metadata"
-  )
-
-  httr::RETRY(
-    "POST",
-    api_uri,
-    body = api_params,
-    times = 12L,
-    pause_cap = 300L
-  ) %>%
-    httr::stop_for_status() %>%
-    httr::content(as = "text") %>%
-    jsonlite::fromJSON() %>%
+  download_redcap_metadata(api_token) %>%
     dplyr::filter(.data[["field_name"]] == "investigator") %>%
     dplyr::pull("select_choices_or_calculations") %>%
-    stringr::str_split(pattern = " [|] ") %>%
+    stringr::str_split(pattern = "\\s*[|]\\s*") %>%
     purrr::flatten_chr() %>%
     dplyr::as_tibble() %>%
     tidyr::separate(
       col = "value",
       into = c("id", "investigator"),
-      sep = "[,] "
+      sep = "\\s*[,]\\s*"
     ) %>%
     dplyr::mutate(
       investigator = sched_std_names(.data[["investigator"]])
-    )
+    ) %>%
+    dplyr::arrange(dplyr::desc(as.integer(.data[["id"]]))) %>%
+    dplyr::distinct(.data[["investigator"]], .keep_all = TRUE) %>%
+    dplyr::arrange(as.integer(.data[["id"]]))
 }

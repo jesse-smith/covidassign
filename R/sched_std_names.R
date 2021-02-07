@@ -30,21 +30,17 @@
 #' @export
 sched_std_names <- function(string) {
   string %>%
+    stringi::stri_trans_general(id = "Any-Latin;Latin-ASCII") %>%
     str_replace_brackets() %>%
     str_replace_braces() %>%
     str_remove_parenthetic() %>%
     str_remove_ordinal() %>%
     str_remove_numeric() %>%
-    stringr::str_replace_na() %>%
-    janitor::make_clean_names(
-      case = "title",
-      use_make_names = FALSE,
-      transliterations = c("Any-Latin", "Latin-ASCII"),
-      sep_out = " "
-    ) %>%
-    str_trim_dashes() %>%
-    stringr::str_squish() %>%
-    str_invert_na()
+    stringr::str_replace_all("[']+", "") %>%
+    stringr::str_replace_all("\\b", " ") %>%
+    stringr::str_replace_all("[^A-Za-z]+", " ") %>%
+    stringr::str_to_title() %>%
+    stringr::str_squish()
 }
 
 #' Replace Square Brackets and Curly Braces with Parentheses

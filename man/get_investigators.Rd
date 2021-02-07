@@ -7,7 +7,7 @@
 get_investigators(
   date = Sys.Date(),
   type = c("inner", "anti_schedule", "anti_redcap"),
-  api_token = Sys.getenv("redcap_CA_token"),
+  api_token = Sys.getenv("redcap_NCA_token"),
   quiet = FALSE
 )
 }

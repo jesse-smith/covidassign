@@ -28,7 +28,7 @@
 get_investigators <- function(
   date = Sys.Date(),
   type = c("inner", "anti_schedule", "anti_redcap"),
-  api_token = Sys.getenv("redcap_CA_token"),
+  api_token = Sys.getenv("redcap_NCA_token"),
   quiet = FALSE
 ) {
 
@@ -49,8 +49,9 @@ get_investigators <- function(
       inv_redcap,
       by = "investigator"
     ) %>%
-      dplyr::select("id", "investigator") %>%
-      dplyr::arrange("investigator")
+      dplyr::select("id", "team", "investigator") %>%
+      dplyr::arrange(.data[["investigator"]], .data[["id"]]) %>%
+      dplyr::distinct(.data[["investigator"]], .keep_all = TRUE)
   } else if (type == "anti_schedule") {
     if (!quiet) rlang::inform("Returning names only in scheduled list...")
     dplyr::anti_join(
@@ -58,7 +59,7 @@ get_investigators <- function(
       inv_redcap,
       by = "investigator"
     ) %>%
-      dplyr::select("investigator") %>%
+      dplyr::select("id", "investigator") %>%
       dplyr::arrange("investigator")
   } else {
     if (!quiet) rlang::inform("Returning names only in REDcap list...")
@@ -67,7 +68,7 @@ get_investigators <- function(
       inv_scheduled,
       by = "investigator"
     ) %>%
-      dplyr::select("investigator") %>%
+      dplyr::select("team", "investigator") %>%
       dplyr::arrange("investigator")
   }
 }

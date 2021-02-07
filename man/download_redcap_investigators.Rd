@@ -4,7 +4,7 @@
 \alias{download_redcap_investigators}
 \title{Download Investigators Listed in the Case Assignment REDcap Project}
 \usage{
-download_redcap_investigators(api_token = Sys.getenv("redcap_CA_token"))
+download_redcap_investigators(api_token = Sys.getenv("redcap_NCA_token"))
 }
 \arguments{
 \item{api_token}{The API token for the Case Assignment REDcap project. The
