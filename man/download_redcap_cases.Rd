@@ -4,10 +4,7 @@
 \alias{download_redcap_cases}
 \title{Download Cases from Case Assignment REDcap Project}
 \usage{
-download_redcap_cases(
-  api_token = Sys.getenv("redcap_NCA_token"),
-  unassigned_only = TRUE
-)
+download_redcap_cases(api_token = Sys.getenv("redcap_NCA_token"))
 }
 \arguments{
 \item{api_token}{The API token for the Case Assignment REDcap project. The

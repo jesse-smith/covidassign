@@ -1,5 +1,5 @@
 translate_acns <- function(
-  .data = covidsms::prep_acns(),
+  .data = covidsms::prep_acns(assign = TRUE),
   date = lubridate::today()
 ) {
   .data %>%

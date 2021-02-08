@@ -7,8 +7,8 @@
 assign_acns(
   .data = translate_acns(),
   date = lubridate::today(),
-  asg_school_age = "Robbie Bradley",
-  asg_long_term_care = "Sherry Walker",
+  asg_school_age = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
+  asg_long_term_care = "Hawa Abdalla",
   api_token = Sys.getenv("redcap_NCA_token")
 )
 }
