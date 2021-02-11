@@ -30,7 +30,7 @@ sched_investigators <- function(
   if (team_sched) {
     from_team_sched <- sched_load_teams(path = path_teams()) %>%
       sched_parse_teams() %>%
-      sched_join_schedules(schedules = team_schedules) %>%
+      sched_join_schedules(schedules = covidassign::team_schedules) %>%
       sched_add_nights_weekends(path = path_nights_weekends()) %>%
       dplyr::mutate(
         null_cycle = purrr::map_lgl(.data[["cycle"]], ~ is.null(.x))

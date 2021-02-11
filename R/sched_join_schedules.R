@@ -16,7 +16,10 @@
 #' @family Case Assignment
 #'
 #' @export
-sched_join_schedules <- function(teams, schedules = team_schedules) {
+sched_join_schedules <- function(
+  teams,
+  schedules = covidassign::team_schedules
+) {
   teams %>%
     tidyr::pivot_longer(
       dplyr::everything(),
@@ -26,7 +29,7 @@ sched_join_schedules <- function(teams, schedules = team_schedules) {
     stats::na.omit() %>%
     dplyr::arrange(.data[["team"]], .data[["member"]]) %>%
     dplyr::left_join(
-      team_schedules,
+      covidassign::team_schedules,
       by = "team"
     )
 }
