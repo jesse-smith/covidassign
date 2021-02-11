@@ -17,17 +17,36 @@ sched_parse_teams <- function(.data) {
     dplyr::mutate(
       row = vec_seq_along(.),
       inv_role = tidyr::replace_na(.data[["role"]] == "Investigators", FALSE),
+      nurse_role = tidyr::replace_na(.data[["role"]] == "PH Nurse", FALSE),
       inv_start_row = .data[["row"]][.data[["inv_role"]]],
+      nurse_row = .data[["row"]][.data[["nurse_role"]]],
       .before = 1L
     ) %>%
     # Filter to rows with investigator names
-    dplyr::filter(.data[["row"]] >= .data[["inv_start_row"]]) %>%
+    dplyr::filter(
+      .data[["row"]] >= .data[["inv_start_row"]] |
+        .data[["row"]] == .data[["nurse_row"]]
+    ) %>%
     # Remove helper variables
-    dplyr::select(-c("row", "inv_role", "inv_start_row", "role")) %>%
-    # Remove empty rows
-    janitor::remove_empty(which = "rows") %>%
+    dplyr::select(-dplyr::ends_with(c("role", "row"))) %>%
     # Parse investigator names
     dplyr::mutate(
-      dplyr::across(dplyr::everything(), ~ sched_std_names(.x))
-    )
+      dplyr::across(.fns = ~ .x %>% sched_std_names() %>% sched_remove_phn())
+    ) %>%
+    # Remove empty rows
+    janitor::remove_empty(which = "rows")
+}
+
+#' Remove "PHN" Placeholder From Nurse Role
+#'
+#' @param string A character vector
+#'
+#' @return A character vector with "PHN" removed when surrounded by only
+#'  symbols and/or numbers. Not case sensitive.
+sched_remove_phn <- function(string) {
+  stringr::str_replace(
+    string,
+    "(?i)^[^A-Za-z]*Phn[^A-Za-z]*$",
+    replacement = NA_character_
+  )
 }
