@@ -1,6 +1,6 @@
 #' Assign Cases to Scheduled Investigators
 #'
-#' `assign_cases()` divides unassigned cases among REDcap investigators
+#' `assign_acns()` divides unassigned cases among REDcap investigators
 #' scheduled to work on `date`. It distributes cases randomly and evenly across
 #' investigators until either all are assigned or there are too few cases for
 #' another round of even distribution. Any remaining cases are assigned randomly
@@ -23,7 +23,7 @@ assign_acns <- function(
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
-  dplyr::bind_rows(
+  asg_data <- dplyr::bind_rows(
     assign_general(.data, date = date, api_token = api_token),
     assign_school_age(.data, assign = asg_school_age, api_token = api_token),
     assign_long_term_care(
@@ -33,6 +33,42 @@ assign_acns <- function(
     )
   ) %>%
     dplyr::select(-c("school_age", "long_term_care"))
+
+  # sched_inv <- suppressMessages(sched_investigators(date = date))
+  #
+  # # Check for scheduled investigators who did not receive cases
+  # excl_inv <- dplyr::anti_join(sched_inv, asg_data, by = "investigator")
+  #
+  # if (!vec_is_empty(excl_inv)) {
+  #   excl_path <- coviData::path_create(
+  #     "V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/excluded_investigators/",
+  #     paste0("excl_inv_", date),
+  #     ext = "csv"
+  #   )
+  #   vroom::vroom_write(
+  #     excl_inv,
+  #     path = excl_path,
+  #     delim = ",",
+  #     na = ""
+  #   )
+  #
+  #   try(coviData::notify(
+  #     to = c(
+  #       "Sesse.Smith@shelbycountytn.gov",
+  #       "Faisal.Mohamed@shelbycountytn.gov",
+  #       "Karim.Gilani@shelbycountytn.gov"
+  #     ),
+  #     subject = paste("Investigators Excluded from Assignment", Sys.Date()),
+  #     body = stringr::str_glue(
+  #       "The following investigators have been excluded from assignment. ",
+  #       "See <a href='file:///{excl_path}'>{excl_path}</a> ",
+  #       "for an archived list.",
+  #       "<br><br>",
+  #       paste0(capture.output(print(excl_inv, n = Inf)), collapse = "<br>")
+  #     )
+  #   ))
+  # }
+  asg_data
 }
 
 assign_general <- function(
