@@ -1,9 +1,28 @@
+#' Translate ACNS Data to REDcap-Useable Format
+#'
+#' `translate_acns()` maps fields from ACNS data to REDcap data and excludes
+#' duplicates + cases older than `days` old.
+#'
+#' @param .data ACNS data. Runs `covidsms::prep_acns(assign = TRUE)` by default.
+#'
+#' @param date The date to use for assignment
+#'
+#' @param days Number of days back to consider valid. `test_date` older than
+#'   this will not be assigned.
+#'
+#' @return The data mapped to REDcap field names
+#'
+#' @export
 translate_acns <- function(
   .data = covidsms::prep_acns(assign = TRUE),
-  date = lubridate::today()
+  date = lubridate::today(),
+  days = 6L
 ) {
   .data %>%
-    dplyr::filter(!.data[["duplicate"]]) %>%
+    dplyr::filter(
+      !.data[["duplicate"]],
+      (.data[["test_date"]] >= date - days) | is.na(.data[["test_date"]])
+    ) %>%
     dplyr::select(
       local_id = "pkey",
       report_d = "date_added",

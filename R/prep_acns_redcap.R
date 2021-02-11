@@ -1,3 +1,13 @@
+#' Prepare Assigned Cases for REDcap Upload
+#'
+#' `prep_acns_redcap()` performs final data cleaning to prepare assigned cases
+#' for upload to REDcap.
+#'
+#' @param .data Assigned case data
+#'
+#' @return Data ready for upload via `upload_assignments()`
+#'
+#' @export
 prep_acns_redcap <- function(.data = assign_acns()) {
 
   .data %>%

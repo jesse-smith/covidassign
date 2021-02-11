@@ -39,4 +39,61 @@ upload_assignments <- function(
   ) %>%
     httr::stop_for_status(task = paste("upload data:", httr::content(.))) %>%
     httr::content()
+    # verify_and_archive_response(.data)
+}
+
+verify_and_archive_response <- function(content, reference) {
+
+  n_content <- vec_size(content)
+  n_reference <- vec_size(reference)
+  response_ok <- n_content == n_reference
+
+  if (!response_ok) {
+    uploaded <- reference[["record_id"]] %in% purrr::flatten_chr(content)
+    rejected_data <- dplyr::filter(reference, !uploaded)
+    show(rejected_data)
+    path_r <- coviData::path_create(
+      "V:/EPI DATA ANALYTICS TEAM/Case Assignment/archive/rejected/",
+      paste0("rejected_assigned_", lubridate::today()),
+      ext = "csv"
+    )
+    path_a <- coviData::path_create(
+      "V:/EPI DATA ANALYTICS TEAM/Case Assignment/archive/accepted/",
+      paste0("accepted_assigned_", lubridate::today()),
+      ext = "csv"
+    )
+    vroom::vroom_write(
+      rejected_data,
+      path = path_r,
+      delim = ",",
+      na = ""
+    )
+    vroom::vroom_write(
+      dplyr::filter(reference, uploaded),
+      path = path_a,
+      delim = ",",
+      na = ""
+    )
+
+    rlang::abort(
+      paste(
+        sum(!uploaded), "record(s) were rejected by REDcap;",
+        "see the output for details"
+      ),
+      data = rejected_data
+    )
+  } else {
+    path <- coviData::path_create(
+      "V:/EPI DATA ANALYTICS TEAM/Case Assignment/archive/accepted/",
+      paste0("assigned_", lubridate::today()),
+      ext = "csv"
+    )
+    vroom::vroom_write(
+      .data,
+      path = path,
+      delim = ",",
+      na = ""
+    )
+    .data
+  }
 }

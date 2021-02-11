@@ -26,7 +26,7 @@ A \code{tibble} containing the results of
 \code{assign_date} and \code{investigator} filled
 }
 \description{
-\code{assign_cases()} divides unassigned cases among REDcap investigators
+\code{assign_acns()} divides unassigned cases among REDcap investigators
 scheduled to work on \code{date}. It distributes cases randomly and evenly across
 investigators until either all are assigned or there are too few cases for
 another round of even distribution. Any remaining cases are assigned randomly

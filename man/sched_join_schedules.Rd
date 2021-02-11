@@ -4,7 +4,7 @@
 \alias{sched_join_schedules}
 \title{Join the \code{team_schedules} Dataset to Teams}
 \usage{
-sched_join_schedules(teams, schedules = team_schedules)
+sched_join_schedules(teams, schedules = covidassign::team_schedules)
 }
 \arguments{
 \item{teams}{A data frame containing teams in columns and members in rows;
