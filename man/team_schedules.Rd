@@ -9,7 +9,7 @@ A data frame with 7 rows and 3 variables:
 \describe{
 \item{team}{a character vector of investigation team letter designations}
 \item{schedule}{a character vector of schedule types}
-\item{anchor}{a \code{Date} vecotr of anchor dates for rotating schedules}
+\item{anchor}{a \code{Date} vector of anchor dates for rotating schedules}
 }
 }
 \source{
