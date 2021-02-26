@@ -4,7 +4,7 @@
 \alias{prep_acns_redcap}
 \title{Prepare Assigned Cases for REDcap Upload}
 \usage{
-prep_acns_redcap(.data = assign_acns())
+prep_acns_redcap(.data = assign_acns(), date = attr(.data, "date"))
 }
 \arguments{
 \item{.data}{Assigned case data}
