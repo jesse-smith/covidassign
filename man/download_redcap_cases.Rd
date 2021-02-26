@@ -7,17 +7,20 @@
 download_redcap_cases(api_token = Sys.getenv("redcap_NCA_token"))
 }
 \arguments{
-\item{api_token}{The API token for the Case Assignment REDcap project. The
-default pulls this from the environment variable \code{redcap_CA_token}}
-
-\item{unassigned_only}{Should only unassigned cases be downloaded?}
+\item{api_token}{The API token for the Case Assignment REDcap project}
 }
 \value{
-A tidy \code{tibble} with all variables in \code{character} format
+A \code{tibble} with all variables in \code{character} format
 }
 \description{
 \code{download_redcap_cases()} downloads records from the
-\strong{Case Assignment} REDcap project. If \code{incl_assigned = FALSE}, it only
-downloads unassigned cases; if \code{incl_assigned = TRUE}, it downloads all
-cases.
+\strong{Case Assignment} REDcap project.
 }
+\section{TODO}{
+
+\enumerate{
+\item Check \code{six} column in NCA to see if exclusion is necessary
+\item Create unit tests
+}
+}
+

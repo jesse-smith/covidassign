@@ -5,7 +5,8 @@
 #'
 #' @section TODO:
 #' \enumerate{
-#'   \item
+#'   \item Check `six` column in NCA to see if exclusion is necessary
+#'   \item Create unit tests
 #' }
 #'
 #' @param api_token The API token for the Case Assignment REDcap project
