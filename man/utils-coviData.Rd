@@ -2,9 +2,9 @@
 % Please edit documentation in R/utils-coviData.R
 \name{utils-coviData}
 \alias{utils-coviData}
-\title{coviData}
+\title{coviData Utilities}
 \description{
-The coviData package serves as a backend for many of the SCHD R packages
-related to COVID-19, including this package. Some functions that would
-otherwise be included in this package are loaded here.
+Import filesystem-related and standardization functions from the coviData
+package
 }
+\keyword{internal}
