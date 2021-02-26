@@ -16,6 +16,7 @@ The input \code{string} with cleaned names
 \code{sched_std_names()} parses investigator names given in the teams
 worksheet into a standard format for matching with REDcap. It:
 \enumerate{
+\item Transliterates characters to ASCII
 \item Replaces square brackets and curly braces with parentheses
 \item Removes parenthetic expressions
 \item Removes ordinal and numeric expressions
