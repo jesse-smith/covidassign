@@ -8,17 +8,20 @@ assign_acns(
   .data = translate_acns(),
   date = attr(.data, "date"),
   asg_school_age = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
-  asg_long_term_care = "Hawa Abdalla",
+  asg_long_term = "Hawa Abdalla",
   api_token = Sys.getenv("redcap_NCA_token")
 )
 }
 \arguments{
+\item{.data}{Data frame of cases to assign, passed from
+\code{\link[covidassign:translate_acns]{translate_acns()}}}
+
 \item{date}{The date to use when checking whether investigators are scheduled}
 
 \item{asg_school_age}{Character vector of names of investigators to assign
 school-age cases}
 
-\item{asg_long_term_care}{Character vector of names of investigators to
+\item{asg_long_term}{Character vector of names of investigators to
 assign long term care facility cases}
 
 \item{api_token}{The API token for the Case Assignment REDcap project. The
@@ -39,6 +42,9 @@ with at most one additional case given to an investigator.
 
 \enumerate{
 \item Pull school age investigators from team lead sheet
+\item Re-factor expressions to be self-documenting (helpers)
+\item Add documentation to helpers
+\item Create unit tests for all functions in file
 }
 }
 

@@ -16,6 +16,9 @@
 #'
 #' @inheritParams get_investigators
 #'
+#' @param .data Data frame of cases to assign, passed from
+#'   \code{\link[covidassign:translate_acns]{translate_acns()}}
+#'
 #' @param asg_school_age Character vector of names of investigators to assign
 #'   school-age cases
 #'
@@ -45,7 +48,10 @@ assign_acns <- function(
 
 #' Assign General Cases to Investigators
 #'
-#' @inheritParams assign_cases
+#' @inheritParams assign_acns
+#'
+#' @return The input `.data` with general cases assigned via `investigator`,
+#'   `team`, and `assign_date` columns
 assign_general <- function(
   .data,
   date = attr(.data, "date"),
@@ -54,7 +60,7 @@ assign_general <- function(
 
   special_investigators <- vec_c(
     eval(rlang::fn_fmls(assign_school_age)[["assign"]]),
-    eval(rlang::fn_fmls(assign_long_term_care)[["assign"]])
+    eval(rlang::fn_fmls(assign_long_term)[["assign"]])
   )
 
   exclude <- coviData::std_names(special_investigators)
@@ -108,6 +114,15 @@ assign_general <- function(
   )
 }
 
+#' Assign School Age Cases to Investigators
+#'
+#' @inheritParams assign_acns
+#'
+#' @param assign Character vector of names of investigators to assign
+#'   school-age cases
+#'
+#' @return The input `.data` with school age cases assigned via `investigator`,
+#'   `team`, and `assign_date` columns
 assign_school_age <- function(
   .data,
   assign = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
@@ -167,6 +182,15 @@ assign_school_age <- function(
   )
 }
 
+#' Assign Long Term Care Facility Cases to Investigators
+#'
+#' @inheritParams assign_acns
+#'
+#' @param assign Character vector of names of investigators to
+#'   assign long term care facility cases
+#'
+#' @return The input `.data` with long term care facility cases assigned via
+#'   `investigator`, `team`, and `assign_date` columns
 assign_long_term <- function(
   .data,
   assign = "Hawa Abdalla",
