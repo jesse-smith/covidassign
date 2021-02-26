@@ -8,6 +8,9 @@ prep_acns_redcap(.data = assign_acns(), date = attr(.data, "date"))
 }
 \arguments{
 \item{.data}{Assigned case data}
+
+\item{date}{The date to assume for "today"; default is given by the \code{date}
+attribute of the input \code{date_tbl}}
 }
 \value{
 Data ready for upload via \code{upload_assignments()}

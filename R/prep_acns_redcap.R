@@ -5,6 +5,9 @@
 #'
 #' @param .data Assigned case data
 #'
+#' @param date The date to assume for "today"; default is given by the `date`
+#'   attribute of the input `date_tbl`
+#'
 #' @return Data ready for upload via `upload_assignments()`
 #'
 #' @export
@@ -97,8 +100,11 @@ distinct_assigned <- function(.data, archive = TRUE) {
     )
   remove(.data)
 
-  tidylog::anti_join(data, assigned, by = join_cols)
-
+  if (rlang::is_installed("tidylog")) {
+    tidylog::anti_join(data, assigned, by = join_cols)
+  } else {
+    dplyr::anti_join(data, assigned, by = join_cols)
+  }
 }
 
 archive_distinct_assigned <- function(
