@@ -5,7 +5,8 @@
 #'
 #' @param .data ACNS data. Runs `covidsms::prep_acns(assign = TRUE)` by default.
 #'
-#' @param date The date to use for assignment
+#' @param date The date to use for assignment; unlike in other functions, this
+#'   defaults to today's date as part of the "translation" process.
 #'
 #' @param days Number of days back to consider valid. `test_date` older than
 #'   this will not be assigned.

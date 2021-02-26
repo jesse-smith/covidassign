@@ -13,7 +13,8 @@ translate_acns(
 \arguments{
 \item{.data}{ACNS data. Runs \code{covidsms::prep_acns(assign = TRUE)} by default.}
 
-\item{date}{The date to use for assignment}
+\item{date}{The date to use for assignment; unlike in other functions, this
+defaults to today's date as part of the "translation" process.}
 
 \item{days}{Number of days back to consider valid. \code{test_date} older than
 this will not be assigned.}
