@@ -7,7 +7,7 @@
 #'   \describe{
 #'     \item{team}{a character vector of investigation team letter designations}
 #'     \item{schedule}{a character vector of schedule types}
-#'     \item{anchor}{a `Date` vecotr of anchor dates for rotating schedules}
+#'     \item{anchor}{a `Date` vector of anchor dates for rotating schedules}
 #'   }
 #'
 #' @source "Investigation Shift Schedules.xlsx"
