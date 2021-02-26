@@ -50,9 +50,9 @@ convert_choices <- function(x) {
 choice_to_tbl <- function(x) {
 
   if (all(rlang::is_na(x))) {
-    return(tibble::tibble())
+    return(dplyr::tibble())
   } else if (all(rlang::is_empty(x))) {
-    return(tibble::tibble(level = integer(), label = character()))
+    return(dplyr::tibble(level = integer(), label = character()))
   }
 
   x %>%
