@@ -14,6 +14,8 @@
 upload_assignments <- function(
   .data,
   api_token = Sys.getenv("redcap_NCA_token"),
+  archive = TRUE,
+  notify = TRUE,
   size_limit = as.integer(0.9 * 32e6)
 ) {
 
@@ -29,71 +31,22 @@ upload_assignments <- function(
     returnContent = "ids"
   )
 
-  httr::POST(
-    # "POST",
+  httr::RETRY(
+    "POST",
     api_uri,
     body = api_params,
-    encode = "form"
-    # times = 12L,
-    # pause_cap = 300L
+    encode = "form",
+    times = 12L,
+    pause_cap = 300L
   ) %>%
     httr::stop_for_status(task = paste("upload data:", httr::content(.))) %>%
-    httr::content()
-    # verify_and_archive_response(.data)
+    convert_assignment_response(data = .data)
 }
 
-verify_and_archive_response <- function(content, reference) {
-
-  n_content <- vec_size(content)
-  n_reference <- vec_size(reference)
-  response_ok <- n_content == n_reference
-
-  if (!response_ok) {
-    uploaded <- reference[["record_id"]] %in% purrr::flatten_chr(content)
-    rejected_data <- dplyr::filter(reference, !uploaded)
-    show(rejected_data)
-    path_r <- coviData::path_create(
-      "V:/EPI DATA ANALYTICS TEAM/Case Assignment/archive/rejected/",
-      paste0("rejected_assigned_", lubridate::today()),
-      ext = "csv"
-    )
-    path_a <- coviData::path_create(
-      "V:/EPI DATA ANALYTICS TEAM/Case Assignment/archive/accepted/",
-      paste0("accepted_assigned_", lubridate::today()),
-      ext = "csv"
-    )
-    vroom::vroom_write(
-      rejected_data,
-      path = path_r,
-      delim = ",",
-      na = ""
-    )
-    vroom::vroom_write(
-      dplyr::filter(reference, uploaded),
-      path = path_a,
-      delim = ",",
-      na = ""
-    )
-
-    rlang::abort(
-      paste(
-        sum(!uploaded), "record(s) were rejected by REDcap;",
-        "see the output for details"
-      ),
-      data = rejected_data
-    )
-  } else {
-    path <- coviData::path_create(
-      "V:/EPI DATA ANALYTICS TEAM/Case Assignment/archive/accepted/",
-      paste0("assigned_", lubridate::today()),
-      ext = "csv"
-    )
-    vroom::vroom_write(
-      .data,
-      path = path,
-      delim = ",",
-      na = ""
-    )
-    .data
-  }
+convert_assignment_response <- function(response, data) {
+  ids <- response %>% httr::content() %>% purrr::flatten_chr()
+  dplyr::mutate(
+    data,
+    uploaded = tidyr::replace_na(.data[["record_id"]] %in% ids, FALSE)
+  )
 }
