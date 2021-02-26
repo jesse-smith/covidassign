@@ -6,7 +6,11 @@
 #' size-stability useful for analyzing function interfaces. See the vctrs
 #' site at \url{https://vctrs.r-lib.org/} for more information.
 #'
-#' @name vctr-helpers
+#' This package is imported directly to encourage development using the
+#' standardized helpers it provides. This decision may be re-thought at a later
+#' date.
+#'
+#' @name utils-vctrs
 #'
 #' @import vctrs
 NULL
