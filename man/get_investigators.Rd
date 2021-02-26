@@ -6,23 +6,22 @@
 \usage{
 get_investigators(
   date = Sys.Date(),
-  type = c("inner", "anti_schedule", "anti_redcap"),
   api_token = Sys.getenv("redcap_NCA_token"),
-  quiet = FALSE
+  quiet = TRUE
 )
 }
 \arguments{
 \item{date}{The date to use when checking whether investigators are scheduled}
 
-\item{type}{The type of join to use. \code{"inner"} returns only investigators in
-both lists (the default). \code{"anti_join_scheduled"} returns investigators who
-are scheduled but not listed in REDcap; \code{"anti_join_redcap"} returns
-investigators who are listed in REDcap but not scheduled.}
-
 \item{api_token}{The API token for the Case Assignment REDcap project. The
 default pulls this from the environment variable \code{redcap_CA_token}.}
 
 \item{quiet}{Should update messages be suppressed?}
+
+\item{type}{The type of join to use. \code{"inner"} returns only investigators in
+both lists (the default). \code{"anti_join_scheduled"} returns investigators who
+are scheduled but not listed in REDcap; \code{"anti_join_redcap"} returns
+investigators who are listed in REDcap but not scheduled.}
 }
 \value{
 A \code{tibble} with one row per investigator and an \code{investigator}
