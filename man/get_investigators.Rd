@@ -17,11 +17,6 @@ get_investigators(
 default pulls this from the environment variable \code{redcap_CA_token}.}
 
 \item{quiet}{Should update messages be suppressed?}
-
-\item{type}{The type of join to use. \code{"inner"} returns only investigators in
-both lists (the default). \code{"anti_join_scheduled"} returns investigators who
-are scheduled but not listed in REDcap; \code{"anti_join_redcap"} returns
-investigators who are listed in REDcap but not scheduled.}
 }
 \value{
 A \code{tibble} with one row per investigator and an \code{investigator}

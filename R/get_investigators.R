@@ -14,11 +14,6 @@
 #'
 #' @inheritParams download_redcap_investigators
 #'
-#' @param type The type of join to use. `"inner"` returns only investigators in
-#'   both lists (the default). `"anti_join_scheduled"` returns investigators who
-#'   are scheduled but not listed in REDcap; `"anti_join_redcap"` returns
-#'   investigators who are listed in REDcap but not scheduled.
-#'
 #' @param quiet Should update messages be suppressed?
 #'
 #' @return A `tibble` with one row per investigator and an `investigator`
