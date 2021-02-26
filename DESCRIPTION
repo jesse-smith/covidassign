@@ -31,9 +31,8 @@ Imports:
     stringr,
     tidyr,
     vctrs
-Suggests: 
+Suggests:
     covr,
-    gert,
     gt,
     roxygen2,
     testthat (>= 3.0.0),
