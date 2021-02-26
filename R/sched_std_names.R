@@ -31,7 +31,7 @@
 #' @export
 sched_std_names <- function(string) {
   string %>%
-    stringi::stri_trans_general(id = "Any-Latin;Latin-ASCII") %>%
+    coviData::str_to_ascii() %>%
     str_replace_brackets() %>%
     str_replace_braces() %>%
     str_remove_parenthetic() %>%
