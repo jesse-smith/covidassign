@@ -7,6 +7,8 @@
 #'
 #' @param api_token API token for REDcap project
 #'
+#' @param size_limit Size limit of REDcap upload, in bytes
+#'
 #' @return An httr `Response` w/ content indicating the number of uploaded
 #'   records
 #'
@@ -14,8 +16,6 @@
 upload_assignments <- function(
   .data,
   api_token = Sys.getenv("redcap_NCA_token"),
-  archive = TRUE,
-  notify = TRUE,
   size_limit = as.integer(0.9 * 32e6)
 ) {
 

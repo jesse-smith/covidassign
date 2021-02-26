@@ -7,8 +7,6 @@
 upload_assignments(
   .data,
   api_token = Sys.getenv("redcap_NCA_token"),
-  archive = TRUE,
-  notify = TRUE,
   size_limit = as.integer(0.9 * 3.2e+07)
 )
 }
@@ -16,6 +14,8 @@ upload_assignments(
 \item{.data}{Assigned cases data}
 
 \item{api_token}{API token for REDcap project}
+
+\item{size_limit}{Size limit of REDcap upload, in bytes}
 }
 \value{
 An httr \code{Response} w/ content indicating the number of uploaded
