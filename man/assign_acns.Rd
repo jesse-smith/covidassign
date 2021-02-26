@@ -6,7 +6,7 @@
 \usage{
 assign_acns(
   .data = translate_acns(),
-  date = lubridate::today(),
+  date = attr(.data, "date"),
   asg_school_age = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
   asg_long_term_care = "Hawa Abdalla",
   api_token = Sys.getenv("redcap_NCA_token")
@@ -15,15 +15,18 @@ assign_acns(
 \arguments{
 \item{date}{The date to use when checking whether investigators are scheduled}
 
+\item{asg_school_age}{Character vector of names of investigators to assign
+school-age cases}
+
+\item{asg_long_term_care}{Character vector of names of investigators to
+assign long term care facility cases}
+
 \item{api_token}{The API token for the Case Assignment REDcap project. The
 default pulls this from the environment variable \code{redcap_CA_token}.}
 }
 \value{
-A \code{tibble} containing the results of
-\code{
-  \link[covidassign:download_redcap_cases]{download_redcap_cases()}
-  }, with
-\code{assign_date} and \code{investigator} filled
+A \code{tibble} containing the input data with columns \code{investigator},
+\code{team}, and \code{assign_date} added
 }
 \description{
 \code{assign_acns()} divides unassigned cases among REDcap investigators
@@ -32,3 +35,10 @@ investigators until either all are assigned or there are too few cases for
 another round of even distribution. Any remaining cases are assigned randomly
 with at most one additional case given to an investigator.
 }
+\section{TODO}{
+
+\enumerate{
+\item Pull school age investigators from team lead sheet
+}
+}
+

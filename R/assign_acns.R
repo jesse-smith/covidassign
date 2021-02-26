@@ -6,81 +6,58 @@
 #' another round of even distribution. Any remaining cases are assigned randomly
 #' with at most one additional case given to an investigator.
 #'
+#' @section TODO:
+#' \enumerate{
+#'   \item Pull school age investigators from team lead sheet
+#'   \item Re-factor expressions to be self-documenting (helpers)
+#'   \item Add documentation to helpers
+#'   \item Create unit tests for all functions in file
+#' }
+#'
 #' @inheritParams get_investigators
 #'
-#' @return A `tibble` containing the results of
-#'   \code{
-#'   \link[covidassign:download_redcap_cases]{download_redcap_cases()}
-#'   }, with
-#'   `assign_date` and `investigator` filled
+#' @param asg_school_age Character vector of names of investigators to assign
+#'   school-age cases
+#'
+#' @param asg_long_term Character vector of names of investigators to
+#'   assign long term care facility cases
+#'
+#' @return A `tibble` containing the input data with columns `investigator`,
+#'   `team`, and `assign_date` added
 #'
 #' @export
 assign_acns <- function(
   .data = translate_acns(),
-  date = lubridate::today(),
+  date = attr(.data, "date"),
   asg_school_age = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
-  asg_long_term_care = "Hawa Abdalla",
+  asg_long_term = "Hawa Abdalla",
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
-  asg_data <- dplyr::bind_rows(
+  assigned_cases <- dplyr::bind_rows(
     assign_general(.data, date = date, api_token = api_token),
     assign_school_age(.data, assign = asg_school_age, api_token = api_token),
-    assign_long_term_care(
-      .data,
-      assign = asg_long_term_care,
-      api_token = api_token
-    )
-  ) %>%
-    dplyr::select(-c("school_age", "long_term_care"))
+    assign_long_term(.data, assign = asg_long_term, api_token = api_token)
+  )
 
-  # sched_inv <- suppressMessages(sched_investigators(date = date))
-  #
-  # # Check for scheduled investigators who did not receive cases
-  # excl_inv <- dplyr::anti_join(sched_inv, asg_data, by = "investigator")
-  #
-  # if (!vec_is_empty(excl_inv)) {
-  #   excl_path <- coviData::path_create(
-  #     "V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/excluded_investigators/",
-  #     paste0("excl_inv_", date),
-  #     ext = "csv"
-  #   )
-  #   vroom::vroom_write(
-  #     excl_inv,
-  #     path = excl_path,
-  #     delim = ",",
-  #     na = ""
-  #   )
-  #
-  #   try(coviData::notify(
-  #     to = c(
-  #       "Sesse.Smith@shelbycountytn.gov",
-  #       "Faisal.Mohamed@shelbycountytn.gov",
-  #       "Karim.Gilani@shelbycountytn.gov"
-  #     ),
-  #     subject = paste("Investigators Excluded from Assignment", Sys.Date()),
-  #     body = stringr::str_glue(
-  #       "The following investigators have been excluded from assignment. ",
-  #       "See <a href='file:///{excl_path}'>{excl_path}</a> ",
-  #       "for an archived list.",
-  #       "<br><br>",
-  #       paste0(capture.output(print(excl_inv, n = Inf)), collapse = "<br>")
-  #     )
-  #   ))
-  # }
-  asg_data
+  dplyr::select(assigned_cases, -c("school_age", "long_term_care"))
 }
 
+#' Assign General Cases to Investigators
+#'
+#' @inheritParams assign_cases
 assign_general <- function(
   .data,
-  date = lubridate::today(),
+  date = attr(.data, "date"),
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
-  exclude <- vec_c(
+  special_investigators <- vec_c(
     eval(rlang::fn_fmls(assign_school_age)[["assign"]]),
     eval(rlang::fn_fmls(assign_long_term_care)[["assign"]])
-  ) %>% coviData::std_names()
+  )
+
+  exclude <- coviData::std_names(special_investigators)
 
   data_general <- dplyr::filter(
     .data,
@@ -97,8 +74,8 @@ assign_general <- function(
     dplyr::filter(!coviData::std_names(.data[["investigator"]]) %in% exclude)
 
   teams <- download_redcap_template() %>%
-    dplyr::filter(field_name == "team") %>%
-    dplyr::pull(select_choices) %>%
+    dplyr::filter(.data[["field_name"]] == "team") %>%
+    dplyr::pull("select_choices") %>%
     purrr::pluck(1L) %>%
     dplyr::mutate(
       level = as.integer(.data[["level"]]),
@@ -110,9 +87,7 @@ assign_general <- function(
 
   # Get number of unassigned cases and investigators
   n_cases <- vec_size(data_general)
-  print(n_cases)
   n_investigators <- vec_size(investigators)
-  print(n_investigators)
 
   # Get number of investigators needed
   n_reps <- n_cases %/% n_investigators
@@ -192,7 +167,7 @@ assign_school_age <- function(
   )
 }
 
-assign_long_term_care <- function(
+assign_long_term <- function(
   .data,
   assign = "Hawa Abdalla",
   api_token = Sys.getenv("redcap_NCA_token")
