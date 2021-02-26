@@ -5,15 +5,8 @@
 #'
 #' @inheritParams sched_calc
 #'
-#' @param path_teams The location of the teams scheduling Excel workbook
-#'   data
-#'
-#' @param path_nights_weekends The location of the nights and weekends
-#'   scheduling Excel workbook
-#'
-#' @param team_schedules A `tibble` containing information for parsing schedules
-#'   into dates; the default is the built-in `team_schedules` dataset and should
-#'   probably not be changed
+#' @param team_sched Should the team schedules be used as "ground truth" for
+#'   team commposition and a backup for scheduling?
 #'
 #' @param scheduled_only Should only scheduled investigators be returned? If
 #'   `FALSE`, all investigators will be returned. Useful for debugging.
@@ -43,7 +36,7 @@ sched_investigators <- function(
       sched_calc(date = date) %>%
       dplyr::rename(investigator = .data[["member"]])
 
-    sched <- tidylog::left_join(
+    sched <- dplyr::left_join(
       sched_load_tomorrow_all(),
       from_team_sched,
       by = c("team", "investigator"),

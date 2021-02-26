@@ -13,18 +13,11 @@ sched_investigators(
 \arguments{
 \item{date}{The date to use when checking whether investigators are scheduled}
 
+\item{team_sched}{Should the team schedules be used as "ground truth" for
+team commposition and a backup for scheduling?}
+
 \item{scheduled_only}{Should only scheduled investigators be returned? If
 \code{FALSE}, all investigators will be returned. Useful for debugging.}
-
-\item{path_teams}{The location of the teams scheduling Excel workbook
-data}
-
-\item{path_nights_weekends}{The location of the nights and weekends
-scheduling Excel workbook}
-
-\item{team_schedules}{A \code{tibble} containing information for parsing schedules
-into dates; the default is the built-in \code{team_schedules} dataset and should
-probably not be changed}
 }
 \value{
 A \code{tibble} containing \code{team}, \code{investigator}, and \code{scheduled} columns
