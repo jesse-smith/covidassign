@@ -20,7 +20,7 @@ to_json_redcap <- function(.data, size_limit = as.integer(0.9 * 32e6), ...) {
   size_limit <- as.integer(size_limit)
 
   json_data <- jsonlite::toJSON(.data, ...)
-  json_size <- object.size(json_data) %>% as.integer()
+  json_size <- utils::object.size(json_data) %>% as.integer()
 
   if (json_size > size_limit) {
 
