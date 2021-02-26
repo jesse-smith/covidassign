@@ -27,15 +27,18 @@ Imports:
     magrittr,
     purrr,
     readxl,
-    rlang (>= 0.1.2),
+    rlang,
     stringr,
     tidyr,
     vctrs
 Suggests: 
     covr,
+    gert,
     gt,
     roxygen2,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tibble,
+    tidylog
 Remotes: 
     jesse-smith/coviData,
     jesse-smith/covidsms
