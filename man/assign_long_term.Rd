@@ -14,6 +14,9 @@ assign_long_term(
 \item{.data}{Data frame of cases to assign, passed from
 \code{\link[covidassign:translate_acns]{translate_acns()}}}
 
+\item{assign}{Character vector of names of investigators to
+assign long term care facility cases}
+
 \item{api_token}{The API token for the Case Assignment REDcap project. The
 default pulls this from the environment variable \code{redcap_CA_token}.}
 }
