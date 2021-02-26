@@ -1,16 +1,16 @@
 #' Download Cases from Case Assignment REDcap Project
 #'
 #' `download_redcap_cases()` downloads records from the
-#' \strong{Case Assignment} REDcap project. If `incl_assigned = FALSE`, it only
-#' downloads unassigned cases; if `incl_assigned = TRUE`, it downloads all
-#' cases.
+#' \strong{Case Assignment} REDcap project.
 #'
-#' @param api_token The API token for the Case Assignment REDcap project. The
-#' default pulls this from the environment variable `redcap_CA_token`
+#' @section TODO:
+#' \enumerate{
+#'   \item
+#' }
 #'
-#' @param unassigned_only Should only unassigned cases be downloaded?
+#' @param api_token The API token for the Case Assignment REDcap project
 #'
-#' @return A tidy `tibble` with all variables in `character` format
+#' @return A `tibble` with all variables in `character` format
 download_redcap_cases <- function(
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
