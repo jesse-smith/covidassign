@@ -33,8 +33,6 @@ prep_acns_redcap <- function(
     create_acns_record_id() %>%
     # Replace missing with empty string
     dplyr::mutate(dplyr::across(.fns = ~ stringr::str_replace_na(.x, ""))) %>%
-    # Remove previously assigned cases
-    distinct_assigned()
     # Relocate REDcap columns to front, in correct order
     relocate_acns_redcap() %>%
     distinct_assigned()
@@ -78,12 +76,14 @@ distinct_assigned <- function(.data, archive = TRUE) {
     dplyr::mutate(
       first_name = coviData::std_names(.data[["first_name"]], case = "title"),
       last_name = coviData::std_names(.data[["last_name"]], case = "title"),
-      dob = std_dates(
-        .data[["dob"]],
-        orders = c("ymd", "ymdHM", "ymdHMS", ""),
-        force = "dt",
-        train = FALSE
-      ),
+      dob = .data[["dob"]] %>%
+        stringr::str_replace("^$", replacement = NA_character_) %>%
+        std_dates(
+          orders = c("ymd", "ymdHM", "ymdHMS", ""),
+          force = "dt",
+          train = FALSE
+        ) %>%
+        format(format = "%Y-%m-%d"),
       phone = covidsms::std_phone(.data[["phone"]], dialr = TRUE),
       .ph_addr_tmp_ = dplyr::coalesce(
         .data[["phone"]],
@@ -101,10 +101,15 @@ distinct_assigned <- function(.data, archive = TRUE) {
   remove(.data)
 
   if (rlang::is_installed("tidylog")) {
-    tidylog::anti_join(data, assigned, by = join_cols)
+    data_distinct <- tidylog::anti_join(data, assigned, by = join_cols)
   } else {
-    dplyr::anti_join(data, assigned, by = join_cols)
+    data_distinct <- dplyr::anti_join(data, assigned, by = join_cols)
   }
+
+  dplyr::select(
+    data_distinct,
+    -dplyr::matches("^[.].*_tmp_$")
+  )
 }
 
 archive_distinct_assigned <- function(
