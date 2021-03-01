@@ -22,8 +22,13 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
-          remotes::install_deps(dependencies = TRUE)
+          Sys.setenv(R_REMOTES_STANDALONE="true")
+          install.packages(c("remotes", "rcmdcheck"), type = "binary")
+          remotes::install_github(
+            "socialresearchcentre/dialr",
+            INSTALL_opts = "--no-multiarch"
+          )
+          remotes::install_deps(dependencies = TRUE, type = "binary")
         shell: Rscript {0}
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
