@@ -57,6 +57,18 @@ schedule_5623() defines a rotating schedule with the following pattern:
 6 on, 2 off
 6 on, 3 off
 
+
+schedule_526264() defines a rotating schedule with the following pattern:
+5 on, 2 off
+5 on, 2 off
+5 on, 2 off
+6 on, 2 off
+(repeat 4 more times...)
+5 on, 2 off
+5 on, 2 off
+5 on, 2 off
+5 on, 4 off
+
 " />
 
 
@@ -149,10 +161,22 @@ schedules do not require an anchor point.</p>
 <li><p>6 on, 3 off</p></li>
 </ul>
 
+<p><code>schedule_526264()</code> defines a rotating schedule with the following pattern:</p><ul>
+<li><p>5 on, 2 off</p></li>
+<li><p>5 on, 2 off</p></li>
+<li><p>5 on, 2 off</p></li>
+<li><p>6 on, 2 off</p></li>
+<li><p>(repeat 4 more times...)</p></li>
+<li><p>5 on, 2 off</p></li>
+<li><p>5 on, 2 off</p></li>
+<li><p>5 on, 2 off</p></li>
+<li><p>5 on, 4 off</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>schedule_predefined</span><span class='op'>(</span>
-  schedule <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"weekdays"</span>, <span class='st'>"42"</span>, <span class='st'>"5623"</span>, <span class='st'>"custom"</span><span class='op'>)</span>,
+  schedule <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"weekdays"</span>, <span class='st'>"42"</span>, <span class='st'>"5623"</span>, <span class='st'>"526254"</span>, <span class='st'>"custom"</span><span class='op'>)</span>,
   start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>,
   end <span class='op'>=</span> <span class='va'>start</span> <span class='op'>+</span> <span class='fl'>29L</span>,
   anchor <span class='op'>=</span> <span class='va'>start</span>,
@@ -163,7 +187,9 @@ schedules do not require an anchor point.</p>
 
 <span class='fu'>schedule_42</span><span class='op'>(</span>start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, end <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>29L</span>, anchor <span class='op'>=</span> <span class='va'>start</span><span class='op'>)</span>
 
-<span class='fu'>schedule_5623</span><span class='op'>(</span>start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, end <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>29L</span>, anchor <span class='op'>=</span> <span class='va'>start</span><span class='op'>)</span></pre>
+<span class='fu'>schedule_5623</span><span class='op'>(</span>start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, end <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>29L</span>, anchor <span class='op'>=</span> <span class='va'>start</span><span class='op'>)</span>
+
+<span class='fu'>schedule_526264</span><span class='op'>(</span>start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, end <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>29L</span>, anchor <span class='op'>=</span> <span class='va'>start</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,7 +219,8 @@ is needed. It must be either a string in "YYYY-MM-DD" format or a
     <tr>
       <th>cycle</th>
       <td><p>A logical vector defining one scheduling cycle. If named, names
-are passed to <code><a href='parse_weekday.html'>parse_weekday()</a></code> for
+are passed to
+<code><a href='sched_parse_weekday.html'>sched_parse_weekday()</a></code> for
 standardization of weekday names.</p></td>
     </tr>
     </table>
@@ -213,14 +240,14 @@ that function for implementing other schedules.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Case Assignment: 
-<code><a href='add_nights_weekends_schedules.html'>add_nights_weekends_schedules</a>()</code>,
-<code><a href='calc_schedules.html'>calc_schedules</a>()</code>,
-<code><a href='join_schedules.html'>join_schedules</a>()</code>,
-<code><a href='load_nights_weekends.html'>load_nights_weekends</a>()</code>,
-<code><a href='load_teams.html'>load_teams</a>()</code>,
-<code><a href='parse_nights_weekends.html'>parse_nights_weekends</a>()</code>,
-<code><a href='schedule.html'>schedule</a>()</code>,
-<code><a href='std_names.html'>std_names</a>()</code></p></div>
+<code><a href='sched_add_nights_weekends.html'>sched_add_nights_weekends</a>()</code>,
+<code><a href='sched_calc.html'>sched_calc</a>()</code>,
+<code><a href='sched_join_schedules.html'>sched_join_schedules</a>()</code>,
+<code><a href='sched_load_nights_weekends.html'>sched_load_nights_weekends</a>()</code>,
+<code><a href='sched_load_teams.html'>sched_load_teams</a>()</code>,
+<code><a href='sched_parse_nights_weekends.html'>sched_parse_nights_weekends</a>()</code>,
+<code><a href='sched_std_names.html'>sched_std_names</a>()</code>,
+<code><a href='schedule.html'>schedule</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

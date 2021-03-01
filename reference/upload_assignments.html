@@ -110,7 +110,7 @@ project, with Investigator and Date of Assignment fields filled." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Upload Assigned Cases to REDcap Case Assignment Project</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/upload_redcap_assignments.R'><code>R/upload_redcap_assignments.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/upload_assignments.R'><code>R/upload_assignments.R</code></a></small>
     <div class="hidden name"><code>upload_assignments.Rd</code></div>
     </div>
 
@@ -119,7 +119,11 @@ project, with Investigator and Date of Assignment fields filled." />
 project, with <code>Investigator</code> and <code>Date of Assignment</code> fields filled.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>upload_assignments</span><span class='op'>(</span><span class='va'>.data</span>, api_token <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"redcap_CA_token"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>upload_assignments</span><span class='op'>(</span>
+  <span class='va'>.data</span>,
+  api_token <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"redcap_NCA_token"</span><span class='op'>)</span>,
+  size_limit <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='fl'>0.9</span> <span class='op'>*</span> <span class='fl'>3.2e+07</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,6 +135,10 @@ project, with <code>Investigator</code> and <code>Date of Assignment</code> fiel
     <tr>
       <th>api_token</th>
       <td><p>API token for REDcap project</p></td>
+    </tr>
+    <tr>
+      <th>size_limit</th>
+      <td><p>Size limit of REDcap upload, in bytes</p></td>
     </tr>
     </table>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Team Schedules Used for Case Assignment — team_schedules • covidassign</title>
+<title>Validate Case Assignment Upload — validate_upload • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,11 @@
 
 
 
-<meta property="og:title" content="Team Schedules Used for Case Assignment — team_schedules" />
-<meta property="og:description" content="A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules." />
+<meta property="og:title" content="Validate Case Assignment Upload — validate_upload" />
+<meta property="og:description" content="validate_upload() validates that all assigned cases were uploaded. By
+default, it archives accepted and rejected cases and notifies relevant
+parties of the status. Note that, unlike validate_assignments(), a
+notification is sent even if all cases are uploaded correctly." />
 
 
 
@@ -109,31 +111,55 @@ each team, and the anchor date for the rotating schedules." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Team Schedules Used for Case Assignment</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/data-team_schedules.R'><code>R/data-team_schedules.R</code></a></small>
-    <div class="hidden name"><code>team_schedules.Rd</code></div>
+    <h1>Validate Case Assignment Upload</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/validate_upload.R'><code>R/validate_upload.R</code></a></small>
+    <div class="hidden name"><code>validate_upload.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules.</p>
+    <p><code>validate_upload()</code> validates that all assigned cases were uploaded. By
+default, it archives accepted and rejected cases and notifies relevant
+parties of the status. Note that, unlike <code><a href='validate_assignments.html'>validate_assignments()</a></code>, a
+notification is sent even if all cases are uploaded correctly.</p>
     </div>
 
-    <pre class="usage"><span class='va'>team_schedules</span></pre>
+    <pre class="usage"><span class='fu'>validate_upload</span><span class='op'>(</span>
+  <span class='va'>.data</span>,
+  archive <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  notify_to <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Jesse.Smith@shelbycountytn.gov"</span>, <span class='st'>"Karim.Gilani@shelbycountytn.gov"</span><span class='op'>)</span>,
+  cnd <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"warning"</span>, <span class='st'>"error"</span><span class='op'>)</span>,
+  date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>.data</span>, <span class='st'>"date"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>Upload data from <code>upload_assigments()</code></p></td>
+    </tr>
+    <tr>
+      <th>archive</th>
+      <td><p>Should accepted and rejected cases be archived?</p></td>
+    </tr>
+    <tr>
+      <th>notify_to</th>
+      <td><p>Email addresses to notify of case assignment. Set to <code>NULL</code>
+to disable notification.</p></td>
+    </tr>
+    <tr>
+      <th>cnd</th>
+      <td><p>Should rejected cases trigger a warning or an error?</p></td>
+    </tr>
+    <tr>
+      <th>date</th>
+      <td><p>The date to use in notification</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 7 rows and 3 variables:</p><dl>
-<dt>team</dt><dd><p>a character vector of investigation team letter designations</p></dd>
-<dt>schedule</dt><dd><p>a character vector of schedule types</p></dd>
-<dt>anchor</dt><dd><p>a <code>Date</code> vector of anchor dates for rotating schedules</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>"Investigation Shift Schedules.xlsx"</p>
+    <p>The input data</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

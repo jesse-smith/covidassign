@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Team Schedules Used for Case Assignment — team_schedules • covidassign</title>
+<title>Remove "PHN" Placeholder From Nurse Role — sched_remove_phn • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Team Schedules Used for Case Assignment — team_schedules" />
-<meta property="og:description" content="A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules." />
+<meta property="og:title" content="Remove "PHN" Placeholder From Nurse Role — sched_remove_phn" />
+<meta property="og:description" content="Remove &quot;PHN&quot; Placeholder From Nurse Role" />
 
 
 
@@ -109,31 +108,30 @@ each team, and the anchor date for the rotating schedules." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Team Schedules Used for Case Assignment</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/data-team_schedules.R'><code>R/data-team_schedules.R</code></a></small>
-    <div class="hidden name"><code>team_schedules.Rd</code></div>
+    <h1>Remove "PHN" Placeholder From Nurse Role</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/sched_parse_teams.R'><code>R/sched_parse_teams.R</code></a></small>
+    <div class="hidden name"><code>sched_remove_phn.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules.</p>
+    <p>Remove "PHN" Placeholder From Nurse Role</p>
     </div>
 
-    <pre class="usage"><span class='va'>team_schedules</span></pre>
+    <pre class="usage"><span class='fu'>sched_remove_phn</span><span class='op'>(</span><span class='va'>string</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>string</th>
+      <td><p>A character vector</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 7 rows and 3 variables:</p><dl>
-<dt>team</dt><dd><p>a character vector of investigation team letter designations</p></dd>
-<dt>schedule</dt><dd><p>a character vector of schedule types</p></dd>
-<dt>anchor</dt><dd><p>a <code>Date</code> vector of anchor dates for rotating schedules</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>"Investigation Shift Schedules.xlsx"</p>
+    <p>A character vector with "PHN" removed when surrounded by only
+symbols and/or numbers. Not case sensitive.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

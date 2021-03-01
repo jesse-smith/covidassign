@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Team Schedules Used for Case Assignment — team_schedules • covidassign</title>
+<title>Parse Investigator Names and Remove (Most) Non-Alphabetical Characters — sched_std_names • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,28 @@
 
 
 
-<meta property="og:title" content="Team Schedules Used for Case Assignment — team_schedules" />
-<meta property="og:description" content="A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules." />
+<meta property="og:title" content="Parse Investigator Names and Remove (Most) Non-Alphabetical Characters — sched_std_names" />
+<meta property="og:description" content="sched_std_names() parses investigator names given in the teams
+worksheet into a standard format for matching with REDcap. It:
+Transliterates characters to ASCII
+Replaces square brackets and curly braces with parentheses
+Removes parenthetic expressions
+Removes ordinal and numeric expressions
+Converts NAs to text (for the next function)
+Passes the intermediate to
+
+      make_clean_names(
+        case = &quot;title&quot;,
+        use_make_names = FALSE,
+        transliterations = c(&quot;Any-Latin&quot;, &quot;Latin-ASCII&quot;),
+        sep_out = &quot; &quot;
+      )
+    
+Removes leading and trailing dashes
+Removes extraneous whitespace
+Inverts converted NAs (back to NA_character_)
+
+" />
 
 
 
@@ -109,31 +128,60 @@ each team, and the anchor date for the rotating schedules." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Team Schedules Used for Case Assignment</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/data-team_schedules.R'><code>R/data-team_schedules.R</code></a></small>
-    <div class="hidden name"><code>team_schedules.Rd</code></div>
+    <h1>Parse Investigator Names and Remove (Most) Non-Alphabetical Characters</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/sched_std_names.R'><code>R/sched_std_names.R</code></a></small>
+    <div class="hidden name"><code>sched_std_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules.</p>
+    <p><code>sched_std_names()</code> parses investigator names given in the teams
+worksheet into a standard format for matching with REDcap. It:</p><ol>
+<li><p>Transliterates characters to ASCII</p></li>
+<li><p>Replaces square brackets and curly braces with parentheses</p></li>
+<li><p>Removes parenthetic expressions</p></li>
+<li><p>Removes ordinal and numeric expressions</p></li>
+<li><p>Converts <code>NA</code>s to text (for the next function)</p></li>
+<li><p>Passes the intermediate to
+<code><a href='https://rdrr.io/pkg/janitor/man/make_clean_names.html'>
+      make_clean_names(
+        case = "title",
+        use_make_names = FALSE,
+        transliterations = c("Any-Latin", "Latin-ASCII"),
+        sep_out = " "
+      )
+    </a></code></p></li>
+<li><p>Removes leading and trailing dashes</p></li>
+<li><p>Removes extraneous whitespace</p></li>
+<li><p>Inverts converted <code>NA</code>s (back to <code>NA_character_</code>)</p></li>
+</ol>
+
     </div>
 
-    <pre class="usage"><span class='va'>team_schedules</span></pre>
+    <pre class="usage"><span class='fu'>sched_std_names</span><span class='op'>(</span><span class='va'>string</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>string</th>
+      <td><p>A character vector containing investigator names</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 7 rows and 3 variables:</p><dl>
-<dt>team</dt><dd><p>a character vector of investigation team letter designations</p></dd>
-<dt>schedule</dt><dd><p>a character vector of schedule types</p></dd>
-<dt>anchor</dt><dd><p>a <code>Date</code> vector of anchor dates for rotating schedules</p></dd>
+    <p>The input <code>string</code> with cleaned names</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>"Investigation Shift Schedules.xlsx"</p>
+    <div class='dont-index'><p>Other Case Assignment: 
+<code><a href='sched_add_nights_weekends.html'>sched_add_nights_weekends</a>()</code>,
+<code><a href='sched_calc.html'>sched_calc</a>()</code>,
+<code><a href='sched_join_schedules.html'>sched_join_schedules</a>()</code>,
+<code><a href='sched_load_nights_weekends.html'>sched_load_nights_weekends</a>()</code>,
+<code><a href='sched_load_teams.html'>sched_load_teams</a>()</code>,
+<code><a href='sched_parse_nights_weekends.html'>sched_parse_nights_weekends</a>()</code>,
+<code><a href='schedule_predefined.html'>schedule_predefined</a>()</code>,
+<code><a href='schedule.html'>schedule</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

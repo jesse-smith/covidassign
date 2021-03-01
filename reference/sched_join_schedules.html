@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Team Schedules Used for Case Assignment — team_schedules • covidassign</title>
+<title>Join the team_schedules Dataset to Teams — sched_join_schedules • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Team Schedules Used for Case Assignment — team_schedules" />
-<meta property="og:description" content="A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules." />
+<meta property="og:title" content="Join the team_schedules Dataset to Teams — sched_join_schedules" />
+<meta property="og:description" content="sched_join_schedules() pivots the teams data to long format and joins the
+schedules specified in team_schedules to the result." />
 
 
 
@@ -109,31 +109,49 @@ each team, and the anchor date for the rotating schedules." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Team Schedules Used for Case Assignment</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/data-team_schedules.R'><code>R/data-team_schedules.R</code></a></small>
-    <div class="hidden name"><code>team_schedules.Rd</code></div>
+    <h1>Join the <code>team_schedules</code> Dataset to Teams</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/sched_join_schedules.R'><code>R/sched_join_schedules.R</code></a></small>
+    <div class="hidden name"><code>sched_join_schedules.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A dataset containing the case investigation teams, the schedule followed by
-each team, and the anchor date for the rotating schedules.</p>
+    <p><code>sched_join_schedules()</code> pivots the <code>teams</code> data to long format and joins the
+schedules specified in <code><a href='team_schedules.html'>team_schedules</a></code> to the result.</p>
     </div>
 
-    <pre class="usage"><span class='va'>team_schedules</span></pre>
+    <pre class="usage"><span class='fu'>sched_join_schedules</span><span class='op'>(</span><span class='va'>teams</span>, schedules <span class='op'>=</span> <span class='fu'>covidassign</span><span class='fu'>::</span><span class='va'><a href='team_schedules.html'>team_schedules</a></span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>teams</th>
+      <td><p>A data frame containing teams in columns and members in rows;
+designed to take the output of
+<code><a href='sched_parse_teams.html'>sched_parse_teams()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>schedules</th>
+      <td><p>Schedules for each team, given by the <code>team_schedules</code>
+dataset</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 7 rows and 3 variables:</p><dl>
-<dt>team</dt><dd><p>a character vector of investigation team letter designations</p></dd>
-<dt>schedule</dt><dd><p>a character vector of schedule types</p></dd>
-<dt>anchor</dt><dd><p>a <code>Date</code> vector of anchor dates for rotating schedules</p></dd>
+    <p>A <code>tibble</code> with columns for <code>team</code>, <code>member</code>, <code>schedule</code>, and
+<code>anchor</code></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>"Investigation Shift Schedules.xlsx"</p>
+    <div class='dont-index'><p>Other Case Assignment: 
+<code><a href='sched_add_nights_weekends.html'>sched_add_nights_weekends</a>()</code>,
+<code><a href='sched_calc.html'>sched_calc</a>()</code>,
+<code><a href='sched_load_nights_weekends.html'>sched_load_nights_weekends</a>()</code>,
+<code><a href='sched_load_teams.html'>sched_load_teams</a>()</code>,
+<code><a href='sched_parse_nights_weekends.html'>sched_parse_nights_weekends</a>()</code>,
+<code><a href='sched_std_names.html'>sched_std_names</a>()</code>,
+<code><a href='schedule_predefined.html'>schedule_predefined</a>()</code>,
+<code><a href='schedule.html'>schedule</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

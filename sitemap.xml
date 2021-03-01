@@ -4,13 +4,19 @@
     <loc>https://jesse-smith.github.io/covidassign//index.html</loc>
   </url>
   <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/add_nights_weekends_schedules.html</loc>
+    <loc>https://jesse-smith.github.io/covidassign//reference/assign_acns.html</loc>
   </url>
   <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/assign_cases.html</loc>
+    <loc>https://jesse-smith.github.io/covidassign//reference/assign_general.html</loc>
   </url>
   <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/calc_schedules.html</loc>
+    <loc>https://jesse-smith.github.io/covidassign//reference/assign_long_term.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/assign_school_age.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/covidassign-paths.html</loc>
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/download_redcap_cases.html</loc>
@@ -19,43 +25,58 @@
     <loc>https://jesse-smith.github.io/covidassign//reference/download_redcap_investigators.html</loc>
   </url>
   <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/get_scheduled_investigators.html</loc>
+    <loc>https://jesse-smith.github.io/covidassign//reference/get_investigators.html</loc>
   </url>
   <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/join_investigators.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/join_schedules.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/load_nights_weekends.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/load_teams.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/magrittr-helpers.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/parse_nights_weekends.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/parse_teams.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/parse_weekday.html</loc>
+    <loc>https://jesse-smith.github.io/covidassign//reference/prep_acns_redcap.html</loc>
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_add_nights_weekends.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_calc.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_investigators.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_join_schedules.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_load_nights_weekends.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_load_teams.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_load_tomorrow.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_load_tomorrow_all.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_parse_nights_weekends.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_parse_teams.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_parse_weekday.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_remove_phn.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/sched_std_names.html</loc>
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/schedule.html</loc>
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/schedule_predefined.html</loc>
-  </url>
-  <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/std_names.html</loc>
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/str_invert_na.html</loc>
@@ -79,9 +100,30 @@
     <loc>https://jesse-smith.github.io/covidassign//reference/team_schedules.html</loc>
   </url>
   <url>
-    <loc>https://jesse-smith.github.io/covidassign//reference/tidyeval-data.html</loc>
+    <loc>https://jesse-smith.github.io/covidassign//reference/to_json_redcap.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/translate_acns.html</loc>
   </url>
   <url>
     <loc>https://jesse-smith.github.io/covidassign//reference/upload_assignments.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/utils-coviData.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/utils-magrittr.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/utils-tidyeval-symbols.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/utils-vctrs.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/validate_assignments.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidassign//reference/validate_upload.html</loc>
   </url>
 </urlset>
