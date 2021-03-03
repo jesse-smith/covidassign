@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Translate ACNS Data to REDcap-Useable Format — translate_acns • covidassign</title>
+<title>Archive Translated ACNS Data — archive_translated • covidassign</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="Translate ACNS Data to REDcap-Useable Format — translate_acns" />
-<meta property="og:description" content="translate_acns() maps fields from ACNS data to REDcap data and excludes
-duplicates + cases older than days old." />
+<meta property="og:title" content="Archive Translated ACNS Data — archive_translated" />
+<meta property="og:description" content="archive_translated() archives cases translated from the output of
+prep_acns(assign = TRUE). It saves the
+translated data without deduplicating." />
 
 
 
@@ -109,49 +110,43 @@ duplicates + cases older than days old." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Translate ACNS Data to REDcap-Useable Format</h1>
+    <h1>Archive Translated ACNS Data</h1>
     <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidassign/blob/master/R/translate_acns.R'><code>R/translate_acns.R</code></a></small>
-    <div class="hidden name"><code>translate_acns.Rd</code></div>
+    <div class="hidden name"><code>archive_translated.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>translate_acns()</code> maps fields from ACNS data to REDcap data and excludes
-duplicates + cases older than <code>days</code> old.</p>
+    <p><code>archive_translated()</code> archives cases translated from the output of
+<code><a href='https://rdrr.io/pkg/covidsms/man/prep_acns.html'>prep_acns(assign = TRUE)</a></code>. It saves the
+translated data without deduplicating.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>translate_acns</span><span class='op'>(</span>
-  .data <span class='op'>=</span> <span class='fu'>covidsms</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/covidsms/man/prep_acns.html'>prep_acns</a></span><span class='op'>(</span>assign <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
-  date <span class='op'>=</span> <span class='fu'>lubridate</span><span class='fu'>::</span><span class='fu'><a href='http://lubridate.tidyverse.org/reference/now.html'>today</a></span><span class='op'>(</span><span class='op'>)</span>,
-  days <span class='op'>=</span> <span class='fl'>6L</span>,
-  archive <span class='op'>=</span> <span class='cn'>TRUE</span>
+    <pre class="usage"><span class='fu'>archive_translated</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  dir <span class='op'>=</span> <span class='st'>"V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/archive/new_tests"</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
-      <td><p>ACNS data. Runs <code><a href='https://rdrr.io/pkg/covidsms/man/prep_acns.html'>covidsms::prep_acns(assign = TRUE)</a></code> by default.</p></td>
+      <th>data</th>
+      <td><p>Data from <code>prep_acns(assign = TRUE)</code></p></td>
     </tr>
     <tr>
-      <th>date</th>
-      <td><p>The date to use for assignment; unlike in other functions, this
-defaults to today's date as part of the "translation" process.</p></td>
+      <th>dir</th>
+      <td><p>Archive directory</p></td>
     </tr>
     <tr>
-      <th>days</th>
-      <td><p>Number of days back to consider valid. <code>test_date</code> older than
-this will not be assigned.</p></td>
-    </tr>
-    <tr>
-      <th>archive</th>
-      <td><p>Should data be archived (before deduplicating)?</p></td>
+      <th>force</th>
+      <td><p>Should an existing file be overwritten?</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The data mapped to REDcap field names</p>
+    <p>The path to the archive file</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
