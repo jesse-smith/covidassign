@@ -7,7 +7,8 @@
 translate_acns(
   .data = covidsms::prep_acns(assign = TRUE),
   date = lubridate::today(),
-  days = 6L
+  days = 6L,
+  archive = TRUE
 )
 }
 \arguments{
@@ -18,6 +19,8 @@ defaults to today's date as part of the "translation" process.}
 
 \item{days}{Number of days back to consider valid. \code{test_date} older than
 this will not be assigned.}
+
+\item{archive}{Should data be archived (before deduplicating)?}
 }
 \value{
 The data mapped to REDcap field names

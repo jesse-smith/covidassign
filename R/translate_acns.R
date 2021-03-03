@@ -11,19 +11,18 @@
 #' @param days Number of days back to consider valid. `test_date` older than
 #'   this will not be assigned.
 #'
+#' @param archive Should data be archived (before deduplicating)?
+#'
 #' @return The data mapped to REDcap field names
 #'
 #' @export
 translate_acns <- function(
   .data = covidsms::prep_acns(assign = TRUE),
   date = lubridate::today(),
-  days = 6L
+  days = 6L,
+  archive = TRUE
 ) {
-  .data %>%
-    dplyr::filter(
-      !.data[["duplicate"]],
-      (.data[["test_date"]] >= date - days) | is.na(.data[["test_date"]])
-    ) %>%
+  translated <- .data %>%
     dplyr::select(
       local_id = "pkey",
       report_d = "date_added",
@@ -44,10 +43,57 @@ translate_acns <- function(
       ) %>% covidsms::std_addr(),
       .before = "school_age"
     ) %>%
+    janitor::clean_names()
+
+  if (archive) archive_translated(translated)
+
+  translated %>%
     dplyr::select(
-      -c("result", "sex", "addr1", "addr2", "city", "state", "zip", "duplicate")
+      -c("result", "sex", "addr1", "addr2", "city", "state", "zip")
     ) %>%
-    janitor::clean_names() %>%
+    dplyr::filter(
+      !.data[["duplicate"]],
+      (.data[["specimen_date"]] >= date - days) | is.na(.data[["specimen_date"]])
+    ) %>%
+    dplyr::select(-"duplicate") %>%
     covidsms::as_date_tbl(date = date)
 }
 
+#' Archive Translated ACNS Data
+#'
+#' `archive_translated()` archives cases translated from the output of
+#' \code{\link[covidsms:prep_acns]{prep_acns(assign = TRUE)}}. It saves the
+#' translated data without deduplicating.
+#'
+#' @param data Data from `prep_acns(assign = TRUE)`
+#'
+#' @param dir Archive directory
+#'
+#' @param force Should an existing file be overwritten?
+#'
+#' @return The path to the archive file
+archive_translated <- function(
+  data,
+  dir = "V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/archive/new_tests",
+  force = FALSE
+) {
+  is_empty <- vec_is_empty(data)
+  path <- path_create(
+    dir,
+    paste0("new_tests_", lubridate::today(), if (is_empty) "_EMPTY"),
+    ext = "csv"
+  )
+
+  if (!force && fs::file_exists(path)) {
+    rlang::inform(
+      paste(
+        "A file already exists in this location; no new data will be written.",
+        "To overwrite the existing file, set `force = TRUE`."
+      )
+    )
+  } else {
+    coviData::write_file_delim(data, path = path)
+  }
+
+  path
+}
