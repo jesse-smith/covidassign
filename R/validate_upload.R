@@ -78,13 +78,25 @@ archive_accepted <- function(
     paste0("accepted_assigned_", lubridate::today(), if (is_empty) "_EMPTY"),
     ext = "csv"
   )
-  coviData::write_file_delim(accepted, path)
+
+  if (!force && fs::file_exists(path)) {
+    rlang::inform(
+      paste(
+        "A file already exists in this location; no new data will be written.",
+        "To overwrite the existing file, set `force = TRUE`."
+      )
+    )
+  } else {
+    coviData::write_file_delim(accepted, path = path)
+  }
+
   path
 }
 
 archive_rejected <- function(
   .data,
-  dir = "V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/archive/rejected/"
+  dir = "V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/archive/rejected/",
+  force = FALSE
 ) {
   rejected <- dplyr::filter(.data, !.data[["uploaded"]])
   is_empty <- vec_is_empty(rejected)
@@ -93,7 +105,18 @@ archive_rejected <- function(
     paste0("rejected_assigned_", lubridate::today(), if (is_empty) "_EMPTY"),
     ext = "csv"
   )
-  coviData::write_file_delim(rejected, path)
+
+  if (!force && fs::file_exists(path)) {
+    rlang::inform(
+      paste(
+        "A file already exists in this location; no new data will be written.",
+        "To overwrite the existing file, set `force = TRUE`."
+      )
+    )
+  } else {
+    coviData::write_file_delim(rejected, path = path)
+  }
+
   path
 }
 

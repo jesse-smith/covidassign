@@ -80,7 +80,18 @@ archive_excl_inv <- function(
     paste0("excl_inv_", lubridate::today(), if (is_empty) "_EMPTY"),
     ext = "csv"
   )
-  coviData::write_file_delim(excl_inv, path = path)
+
+  if (!force && fs::file_exists(path)) {
+    rlang::inform(
+      paste(
+        "A file already exists in this location; no new data will be written.",
+        "To overwrite the existing file, set `force = TRUE`."
+      )
+    )
+  } else {
+    coviData::write_file_delim(excl_inv, path = path)
+  }
+
   path
 }
 
