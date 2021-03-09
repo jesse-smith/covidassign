@@ -72,7 +72,8 @@ validate_assignments <- function(
 archive_excl_inv <- function(
   excl_inv,
   dir = path_create("V:/EPI DATA ANALYTICS TEAM/Case Assignment/",
-                    "data/excluded_investigators/")
+                    "data/excluded_investigators/"),
+  force = FALSE
 ) {
   is_empty <- vec_is_empty(excl_inv)
   path <- path_create(

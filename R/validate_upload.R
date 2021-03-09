@@ -69,7 +69,8 @@ validate_upload <- function(
 
 archive_accepted <- function(
   .data,
-  dir = "V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/archive/accepted/"
+  dir = "V:/EPI DATA ANALYTICS TEAM/Case Assignment/data/archive/accepted/",
+  force = FALSE
 ) {
   accepted <- dplyr::filter(.data, .data[["uploaded"]])
   is_empty <- vec_is_empty(accepted)
