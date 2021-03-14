@@ -25,6 +25,7 @@ prep_acns_redcap <- function(
       specimen_date = format(.data[["specimen_date"]], "%Y-%m-%d"),
       investigator = as.character(.data[["investigator"]]),
       team = as.character(.data[["team"]]),
+      nbs = as.character(.data[["nbs"]]),
       first_name = coviData::std_names(.data[["first_name"]], case = "title"),
       last_name = coviData::std_names(.data[["last_name"]], case = "title"),
       address = stringr::str_to_title(.data[["address"]])
