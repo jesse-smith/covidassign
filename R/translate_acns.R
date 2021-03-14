@@ -26,6 +26,7 @@ translate_acns <- function(
     dplyr::select(
       local_id = "pkey",
       report_d = "date_added",
+      "nbs",
       "first_name",
       "last_name",
       dob = "date_of_birth",
