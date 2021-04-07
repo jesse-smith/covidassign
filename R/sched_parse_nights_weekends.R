@@ -17,14 +17,13 @@
 #' @export
 sched_parse_nights_weekends <- function(.data) {
 
-  weekdays <- sched_parse_weekday(
-    c("sun", "mon", "tue", "wed", "thu", "fri", "sat")
-  )
+  weekdays <- sched_parse_weekday(c("sun","mon","tue","wed","thu","fri","sat"))
 
   .data %>%
     dplyr::mutate(role = sched_std_names(.data[["role"]])) %>%
     dplyr::filter(.data[["role"]] == "Investigator") %>%
-    dplyr::select("member", c("sun", "mon", "tues", "wed", "thurs", "fri", "sat")) %>%
+    dplyr::rename_with(~ dplyr::coalesce(sched_parse_weekday(.x), .x)) %>%
+    dplyr::select("member", {{ weekdays }}) %>%
     dplyr::mutate(
       member = sched_std_names(.data[["member"]]),
       dplyr::across(!"member", ~ !is.na(.x))
