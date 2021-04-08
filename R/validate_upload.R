@@ -219,5 +219,17 @@ filter_duplicates <- function(.data) {
     dplyr::filter(.data[["assign_date"]] < {{ min_assign_date }}) %>%
     dplyr::select({{ join_cols }})
 
-  dplyr::semi_join(.data, assigned, by = join_cols)
+  inner_dupes <- .data %>%
+    dplyr::add_count(
+      .data[["first_name"]],
+      .data[["last_name"]],
+      .data[["dob"]]
+    ) %>%
+    dplyr::filter(.data[["n"]] > 1L)
+
+  .data %>%
+    dplyr::semi_join(assigned, by = join_cols) %>%
+    dplyr::bind_rows(inner_dupes) %>%
+    dplyr::distinct(.data[["record_id"]], .keep_all = TRUE) %>%
+    dplyr::arrange(.data[["record_id"]])
 }
