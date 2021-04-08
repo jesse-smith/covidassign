@@ -72,8 +72,32 @@ distinct_assigned <- function(.data, archive = TRUE) {
   # Columns to use when joining previous assignments with `.data` below
   join_cols <- c("first_name", "last_name", "dob", ".ph_addr_tmp_")
 
+  # Columns to download from REDcap - NCA
+  nca_cols <- c(
+    "first_name",
+    "last_name",
+    "dob",
+    "phone",
+    "address"
+  )
+
+  # Columns to download from REDcap - NIT
+  nit_cols <- c(
+    "firstname",
+    "lastname",
+    "dob",
+    "phone",
+    "phone2",
+    "guardian_name_2",
+    "address",
+    "city",
+    "state",
+    "zipcode"
+  )
+  nit_phone <- c("phone", "phone2", "guardian_name_2")
+
   # Previous assignments are loaded/parsed for removal from `.data`
-  assigned <- download_redcap_cases() %>%
+  assigned <- download_nca_records(fields = nca_cols) %>%
     dplyr::mutate(
       first_name = coviData::std_names(.data[["first_name"]], case = "title"),
       last_name = coviData::std_names(.data[["last_name"]], case = "title"),
@@ -86,25 +110,75 @@ distinct_assigned <- function(.data, archive = TRUE) {
         ) %>%
         format(format = "%Y-%m-%d"),
       phone = covidsms::std_phone(.data[["phone"]], dialr = TRUE),
+      address = covidsms::std_addr(.data[["address"]]),
+      .zip_tmp_ = .data[["address"]] %>%
+        stringi::stri_reverse() %>%
+        stringr::str_extract("[0-9]{5,}") %>%
+        stringi::stri_reverse() %>%
+        stringr::str_extract("[0-9]{5}"),
       .ph_addr_tmp_ = dplyr::coalesce(
         .data[["phone"]],
-        covidsms::std_addr(.data[["address"]])
+        .data[[".zip_tmp_"]],
+        .data[["address"]]
       )
     ) %>%
     dplyr::select("record_id", {{ join_cols }})
+
+  # investigated <- download_nit_records(fields = nit_cols) %>%
+  #   dplyr::mutate(
+  #     first_name = coviData::std_names(.data[["firstname"]], case = "title"),
+  #     last_name = coviData::std_names(.data[["lastname"]], case = "title"),
+  #     dob = .data[["dob"]] %>%
+  #       stringr::str_replace("^$", replacement = NA_character_) %>%
+  #       std_dates(
+  #         orders = c("ymd", "ymdHM", "ymdHMS", ""),
+  #         force = "dt",
+  #         train = FALSE
+  #       ) %>%
+  #       format(format = "%Y-%m-%d"),
+  #     phone = dplyr::across({{ nit_phone }}, covidsms::std_phone) %>%
+  #       dplyr::transmute(ph = coviData::coalesce_across({{ nit_phone }})) %>%
+  #       dplyr::pull("ph"),
+  #     address = covidsms::std_addr(
+  #       paste(
+  #         .data[["address"]],
+  #         .data[["city"]],
+  #         .data[["state"]],
+  #         .data[["zipcode"]]
+  #       )
+  #     ),
+  #     .zip_tmp_ = stringr::str_extract(.data[["zipcode"]], "[0-9]{5}"),
+  #     .ph_addr_tmp_ = dplyr::coalesce(
+  #       .data[["phone"]],
+  #       .data[[".zip_tmp_"]],
+  #       .data[["address"]]
+  #     )
+  #   ) %>%
+  #   dplyr::select("record_id", {{ join_cols }})
 
   # `.data` needs a `record_id` and phone/address variable for joining
   data <- .data %>%
     create_acns_record_id(force = TRUE) %>%
     dplyr::mutate(
-      .ph_addr_tmp_ = dplyr::coalesce(.data[["phone"]], .data[["address"]])
+      .zip_tmp_ = .data[["address"]] %>%
+        stringi::stri_reverse() %>%
+        stringr::str_extract("[0-9]{5,}") %>%
+        stringi::stri_reverse() %>%
+        stringr::str_extract("[0-9]{5}"),
+      .ph_addr_tmp_ = dplyr::coalesce(
+        .data[["phone"]],
+        .data[["zip"]],
+        .data[["address"]]
+      )
     )
   remove(.data)
 
   if (rlang::is_installed("tidylog")) {
-    data_distinct <- tidylog::anti_join(data, assigned, by = join_cols)
+    data_distinct <- data %>%
+      tidylog::anti_join(assigned, by = join_cols)
   } else {
-    data_distinct <- dplyr::anti_join(data, assigned, by = join_cols)
+    data_distinct <- data %>%
+      dplyr::anti_join(assigned, by = join_cols)
   }
 
   dplyr::select(
