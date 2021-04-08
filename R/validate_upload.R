@@ -163,11 +163,17 @@ notify_upload <- function(
 
   subject <- paste0("Case Assignments Upload (", dt_fmt, ")")
 
+  if (has_dupes) {
+    dupe_msg <- "Potential duplicates have been detected:"
+  } else {
+    dupe_msg <- "No potential duplicates were detected."
+  }
+
   body <- stringr::str_glue(
     "Case assignments for ", dt_fmt, " have been uploaded to REDcap as below:",
     "<br><br>",
     tbl,
-    if (has_dupes) "<br> Potential duplicates have been detected:" else "",
+    paste0("<br>", dupe_msg),
     if (has_dupes) tbl_dupes else "",
     if (!is.null(path)) "<br><br>" else "",
     if (!is.null(path)) "Please see <a href='{path}'>{path}</a>" else "",
