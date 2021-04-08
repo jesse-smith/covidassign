@@ -139,6 +139,26 @@ notify_upload <- function(
     tbl <- paste0(utils::capture.output(print(tbl)), collapse = "<br>")
   }
 
+  tbl_dupes <- .data %>%
+    filter_duplicates() %>%
+    dplyr::select(
+      `Record ID` = "record_id",
+      `First Name` = "first_name",
+      `Last Name` = "last_name",
+      `Date of Birth` = "dob"
+    )
+
+  has_dupes <- !vec_is_empty(tbl_dupes)
+
+  if (has_dupes && rlang::is_installed("gt")) {
+    tbl_dupes <- tbl_dupes %>% gt::gt() %>% gt::as_raw_html()
+  } else if (has_dupes) {
+    tbl_dupes <- paste0(
+      utils::capture.output(print(tbl_dupes)),
+      collapse = "<br>"
+    )
+  }
+
   dt_fmt <- format(date, "%m/%d/%y")
 
   subject <- paste0("Case Assignments Upload (", dt_fmt, ")")
@@ -147,10 +167,51 @@ notify_upload <- function(
     "Case assignments for ", dt_fmt, " have been uploaded to REDcap as below:",
     "<br><br>",
     tbl,
+    if (has_dupes) "<br> Potential duplicates have been detected:" else "",
+    if (has_dupes) tbl_dupes else "",
     if (!is.null(path)) "<br><br>" else "",
     if (!is.null(path)) "Please see <a href='{path}'>{path}</a>" else "",
     if (!is.null(path)) "for successful and failed uploads." else ""
   )
 
   coviData::notify(to = to, subject = subject, body = body, html = TRUE)
+}
+
+filter_duplicates <- function(.data) {
+
+  join_cols <- c("first_name", "last_name", "dob")
+  nca_fields <- c("first_name", "last_name", "dob", "assign_date")
+
+  min_assign_date <- .data[["assign_date"]] %>%
+    stringr::str_replace("^$", replacement = NA_character_) %>%
+    coviData::std_dates(
+      orders = c("ymdHM", "ymdT", "ymd", ""),
+      force = "dttm",
+      train = FALSE
+    ) %>% min(na.rm = TRUE)
+
+  assigned <- download_nca_records(fields = nca_fields) %>%
+    dplyr::transmute(
+      first_name = coviData::std_names(.data[["first_name"]], case = "title"),
+      last_name = coviData::std_names(.data[["first_name"]], case = "title"),
+      dob = .data[["dob"]] %>%
+        stringr::str_replace("^$", replacement = NA_character_) %>%
+        coviData::std_dates(
+          orders = c("ymd", "ymdHM", "ymdT", ""),
+          force = "dt",
+          train = FALSE
+        ) %>%
+        format("%Y-%m-%d"),
+      assign_date = .data[["assign_date"]] %>%
+        stringr::str_replace("^$", replacement = NA_character_) %>%
+        coviData::std_dates(
+          orders = c("ymdHM", "ymdT", "ymd", ""),
+          force = "dttm",
+          train = FALSE
+        )
+    ) %>%
+    dplyr::filter(.data[["assign_date"]] < {{ min_assign_date }}) %>%
+    dplyr::select({{ join_cols }})
+
+  dplyr::semi_join(.data, assigned, by = join_cols)
 }
