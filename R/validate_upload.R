@@ -47,7 +47,7 @@ validate_upload <- function(
     )
   }
 
-  rejected <- dplyr::filter(.data, !.data[["uploaded"]])
+  rejected <- dplyr::filter(.data, !as.logical(.data[["uploaded"]]))
 
   if (!vec_is_empty(rejected)) {
     rejected_msg <- paste0(
