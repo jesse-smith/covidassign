@@ -74,6 +74,7 @@ distinct_assigned <- function(.data, archive = TRUE) {
 
   # Columns to download from REDcap - NCA
   nca_cols <- c(
+    "record_id",
     "first_name",
     "last_name",
     "dob",
@@ -167,7 +168,7 @@ distinct_assigned <- function(.data, archive = TRUE) {
         stringr::str_extract("[0-9]{5}"),
       .ph_addr_tmp_ = dplyr::coalesce(
         .data[["phone"]],
-        .data[["zip"]],
+        .data[[".zip_tmp_"]],
         .data[["address"]]
       )
     )
