@@ -6,7 +6,7 @@
 \usage{
 sched_investigators(
   date = lubridate::today(),
-  team_sched = TRUE,
+  team_sched = FALSE,
   scheduled_only = TRUE
 )
 }

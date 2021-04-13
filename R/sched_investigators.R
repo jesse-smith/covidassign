@@ -16,7 +16,7 @@
 #' @export
 sched_investigators <- function(
   date = lubridate::today(),
-  team_sched = TRUE,
+  team_sched = FALSE,
   scheduled_only = TRUE
 ) {
   rlang::inform("Loading teams...")
