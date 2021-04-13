@@ -199,7 +199,7 @@ filter_duplicates <- function(.data) {
   assigned <- download_nca_records(fields = nca_fields) %>%
     dplyr::transmute(
       first_name = coviData::std_names(.data[["first_name"]], case = "title"),
-      last_name = coviData::std_names(.data[["first_name"]], case = "title"),
+      last_name = coviData::std_names(.data[["last_name"]], case = "title"),
       dob = .data[["dob"]] %>%
         stringr::str_replace("^$", replacement = NA_character_) %>%
         coviData::std_dates(
