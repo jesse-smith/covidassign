@@ -19,13 +19,13 @@ sched_parse_teams <- function(.data) {
       inv_role = tidyr::replace_na(.data[["role"]] == "Investigators", FALSE),
       nurse_role = tidyr::replace_na(.data[["role"]] == "PH Nurse", FALSE),
       inv_start_row = .data[["row"]][.data[["inv_role"]]],
-      nurse_row = .data[["row"]][.data[["nurse_role"]]],
+      # nurse_row = if (any(.data)) .data[["row"]][.data[["nurse_role"]]],
       .before = 1L
     ) %>%
     # Filter to rows with investigator names
     dplyr::filter(
-      .data[["row"]] >= .data[["inv_start_row"]] |
-        .data[["row"]] == .data[["nurse_row"]]
+      .data[["row"]] >= .data[["inv_start_row"]]
+        # .data[["row"]] == .data[["nurse_row"]]
     ) %>%
     # Remove helper variables
     dplyr::select(-dplyr::ends_with(c("role", "row"))) %>%
