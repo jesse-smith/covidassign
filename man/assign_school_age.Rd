@@ -6,7 +6,7 @@
 \usage{
 assign_school_age(
   .data,
-  assign = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
+  date = attr(.data, "date"),
   api_token = Sys.getenv("redcap_NCA_token")
 )
 }
@@ -14,8 +14,7 @@ assign_school_age(
 \item{.data}{Data frame of cases to assign, passed from
 \code{\link[covidassign:translate_acns]{translate_acns()}}}
 
-\item{assign}{Character vector of names of investigators to assign
-school-age cases}
+\item{date}{The date to use when checking whether investigators are scheduled}
 
 \item{api_token}{The API token for the Case Assignment REDcap project. The
 default pulls this from the environment variable \code{redcap_CA_token}.}

@@ -19,12 +19,6 @@
 #' @param .data Data frame of cases to assign, passed from
 #'   \code{\link[covidassign:translate_acns]{translate_acns()}}
 #'
-#' @param asg_school_age Character vector of names of investigators to assign
-#'   school-age cases
-#'
-#' @param asg_long_term Character vector of names of investigators to
-#'   assign long term care facility cases
-#'
 #' @return A `tibble` containing the input data with columns `investigator`,
 #'   `team`, and `assign_date` added
 #'
@@ -32,15 +26,13 @@
 assign_acns <- function(
   .data = translate_acns(),
   date = attr(.data, "date"),
-  asg_school_age = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
-  asg_long_term = "Hawa Abdalla",
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
   assigned_cases <- dplyr::bind_rows(
     assign_general(.data, date = date, api_token = api_token),
-    assign_school_age(.data, assign = asg_school_age, api_token = api_token),
-    assign_long_term(.data, assign = asg_long_term, api_token = api_token)
+    assign_school_age(.data, api_token = api_token),
+    assign_long_term(.data, api_token = api_token)
   )
 
   dplyr::select(assigned_cases, -c("school_age", "long_term_care"))
@@ -58,13 +50,6 @@ assign_general <- function(
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
-  special_investigators <- vec_c(
-    eval(rlang::fn_fmls(assign_school_age)[["assign"]]),
-    eval(rlang::fn_fmls(assign_long_term)[["assign"]])
-  )
-
-  exclude <- coviData::std_names(special_investigators)
-
   data_general <- dplyr::filter(
     .data,
     !.data[["school_age"]],
@@ -72,12 +57,12 @@ assign_general <- function(
   )
   remove(.data)
 
-  investigators <- get_investigators(date = date, api_token = api_token) %>%
-    dplyr::mutate(
-      id = as.integer(.data[["id"]]),
-      team = stringr::str_to_lower(.data[["team"]])
-    ) %>%
-    dplyr::filter(!coviData::std_names(.data[["investigator"]]) %in% exclude)
+  investigators <- get_investigators(
+    date = date,
+    type = "general",
+    api_token = api_token
+  ) %>%
+    dplyr::mutate(id = as.integer(.data[["id"]]))
 
   teams <- download_redcap_template() %>%
     dplyr::filter(.data[["field_name"]] == "team") %>%
@@ -88,8 +73,7 @@ assign_general <- function(
       label = stringr::str_to_lower(.data[["label"]])
     ) %>%
     dplyr::transmute(t = set_names(.data[["level"]], .data[["label"]])) %>%
-    dplyr::pull(1L) %>%
-    append(c("school" = NA_integer_))
+    dplyr::pull(1L)
 
   # Get number of unassigned cases and investigators
   n_cases <- vec_size(data_general)
@@ -118,46 +102,24 @@ assign_general <- function(
 #'
 #' @inheritParams assign_acns
 #'
-#' @param assign Character vector of names of investigators to assign
-#'   school-age cases
-#'
 #' @return The input `.data` with school age cases assigned via `investigator`,
 #'   `team`, and `assign_date` columns
 assign_school_age <- function(
   .data,
-  assign = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
+  date = attr(.data, "date"),
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
-  asg_num <- is.numeric(assign)
-  asg_chr <- is.character(assign)
-
-  if (asg_num) {
-    assign <- vec_cast(assign, integer())
-  } else if (!asg_chr) {
-    rlang::abort("`assign` must be character or numeric")
-  }
+  investigators <- get_investigators(date = date, api_token = api_token) %>%
+    dplyr::mutate(
+      id = as.integer(.data[["id"]]),
+      team = stringr::str_to_lower(.data[["team"]])
+    ) %>%
+    dplyr::filter(.data[["team"]] == "school")
 
   data_school_age <- dplyr::filter(.data, .data[["school_age"]])
 
   if (vec_is_empty(data_school_age)) return(data_school_age)
-
-  investigators <- download_redcap_investigators() %>%
-    dplyr::mutate(
-      id = as.integer(.data[["id"]]),
-      investigator = sched_std_names(.data[["investigator"]])
-    ) %>%
-    purrr::when(
-      asg_num ~ dplyr::filter(., as.integer(.data[["id"]]) %in% assign),
-      ~ dplyr::filter(., .data[["investigator"]] %in% sched_std_names(assign))
-    )
-
-  coviData::assert_all(
-    vec_size(investigators) == vec_size(assign),
-    message = paste(
-      "All values in `assign` must match exactly one investigator in REDcap"
-    )
-  )
 
   # Get number of unassigned cases and investigators
   n_cases <- vec_size(data_school_age)
@@ -177,7 +139,7 @@ assign_school_age <- function(
   dplyr::mutate(
     data_school_age,
     investigator = inv_asg[["id"]],
-    team = NA_integer_,
+    team = 9L,
     assign_date = lubridate::now()
   )
 }
@@ -193,7 +155,7 @@ assign_school_age <- function(
 #'   `investigator`, `team`, and `assign_date` columns
 assign_long_term <- function(
   .data,
-  assign = "Hawa Abdalla",
+  assign = "LTCF",
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
@@ -243,7 +205,7 @@ assign_long_term <- function(
   dplyr::mutate(
     data_long_term_care,
     investigator = inv_asg[["id"]],
-    team = NA_integer_,
+    team = 10L,
     assign_date = lubridate::now()
   )
 }

@@ -6,7 +6,7 @@
 \usage{
 assign_long_term(
   .data,
-  assign = "Hawa Abdalla",
+  assign = "LTCF",
   api_token = Sys.getenv("redcap_NCA_token")
 )
 }

@@ -7,8 +7,6 @@
 assign_acns(
   .data = translate_acns(),
   date = attr(.data, "date"),
-  asg_school_age = c("Reed Wagner", "Camry Gipson", "Logan Sell", "Shanna Layrock"),
-  asg_long_term = "Hawa Abdalla",
   api_token = Sys.getenv("redcap_NCA_token")
 )
 }
@@ -17,12 +15,6 @@ assign_acns(
 \code{\link[covidassign:translate_acns]{translate_acns()}}}
 
 \item{date}{The date to use when checking whether investigators are scheduled}
-
-\item{asg_school_age}{Character vector of names of investigators to assign
-school-age cases}
-
-\item{asg_long_term}{Character vector of names of investigators to
-assign long term care facility cases}
 
 \item{api_token}{The API token for the Case Assignment REDcap project. The
 default pulls this from the environment variable \code{redcap_CA_token}.}
