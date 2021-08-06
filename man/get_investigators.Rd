@@ -6,12 +6,15 @@
 \usage{
 get_investigators(
   date = Sys.Date(),
+  type = c("all", "general", "school"),
   api_token = Sys.getenv("redcap_NCA_token"),
   quiet = TRUE
 )
 }
 \arguments{
 \item{date}{The date to use when checking whether investigators are scheduled}
+
+\item{type}{The type or group of investigators to return}
 
 \item{api_token}{The API token for the Case Assignment REDcap project. The
 default pulls this from the environment variable \code{redcap_CA_token}.}

@@ -34,11 +34,9 @@ sched_load_tomorrow <- function(path) {
     fs::path_file() %>%
     fs::path_ext_remove() %>%
     stringr::str_to_upper() %>%
-    stringr::str_replace_all("[^A-Z0-9']", replacement = " ") %>%
-    stringr::str_remove_all("[^A-Z]+") %>%
+    stringr::str_remove_all("[^A-Z ]+") %>%
     stringr::str_squish() %>%
-    stringr::str_extract("(^TEAM[ ]?[A-Z])|(^SCHOOL\\s*TEAM)") %>%
-    stringr::str_remove("\\s*TEAM\\s*") %>%
+    stringr::str_extract("(?<=[ ])[A-Z]$|SCHOOL") %>%
     stringr::str_to_lower()
 
   suppressMessages(coviData::read_file_excel(path)) %>%

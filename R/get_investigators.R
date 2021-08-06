@@ -14,6 +14,8 @@
 #'
 #' @inheritParams download_redcap_investigators
 #'
+#' @param type The type or group of investigators to return
+#'
 #' @param quiet Should update messages be suppressed?
 #'
 #' @return A `tibble` with one row per investigator and an `investigator`
@@ -22,18 +24,32 @@
 #' @export
 get_investigators <- function(
   date = Sys.Date(),
+  type = c("all", "general", "school"),
   api_token = Sys.getenv("redcap_NCA_token"),
   quiet = TRUE
 ) {
 
+  type <- rlang::arg_match(type)[[1L]]
+
   if (!quiet) rlang::inform("Loading investigators...")
-  inv_scheduled <- suppressMessages(
-    sched_investigators(date = date)
+
+  inv_scheduled <- purrr::when(
+    suppressMessages(sched_investigators(date = date)),
+    type == "general" ~ dplyr::filter(
+      ., stringr::str_detect(.data[["team"]], "(?i)^[a-z]$")
+    ),
+    type == "school" ~ dplyr::filter(
+      ., stringr::str_detect(.data[["team"]], "(?i)^school$")
+    ),
+    ~ .
   )
+
   inv_redcap <- suppressMessages(
     download_redcap_investigators(api_token = api_token)
   )
+
   if (!quiet) rlang::inform("Returning investigators in both lists...")
+
   dplyr::inner_join(
     inv_scheduled,
     inv_redcap,
