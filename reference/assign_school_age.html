@@ -119,7 +119,7 @@
 
     <pre class="usage"><span class='fu'>assign_school_age</span><span class='op'>(</span>
   <span class='va'>.data</span>,
-  assign <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Reed Wagner"</span>, <span class='st'>"Camry Gipson"</span>, <span class='st'>"Logan Sell"</span>, <span class='st'>"Shanna Layrock"</span><span class='op'>)</span>,
+  date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>.data</span>, <span class='st'>"date"</span><span class='op'>)</span>,
   api_token <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"redcap_NCA_token"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
@@ -132,9 +132,8 @@
 <code><a href='translate_acns.html'>translate_acns()</a></code></p></td>
     </tr>
     <tr>
-      <th>assign</th>
-      <td><p>Character vector of names of investigators to assign
-school-age cases</p></td>
+      <th>date</th>
+      <td><p>The date to use when checking whether investigators are scheduled</p></td>
     </tr>
     <tr>
       <th>api_token</th>

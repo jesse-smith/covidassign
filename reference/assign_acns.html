@@ -128,8 +128,6 @@ with at most one additional case given to an investigator.</p>
     <pre class="usage"><span class='fu'>assign_acns</span><span class='op'>(</span>
   .data <span class='op'>=</span> <span class='fu'><a href='translate_acns.html'>translate_acns</a></span><span class='op'>(</span><span class='op'>)</span>,
   date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>.data</span>, <span class='st'>"date"</span><span class='op'>)</span>,
-  asg_school_age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Reed Wagner"</span>, <span class='st'>"Camry Gipson"</span>, <span class='st'>"Logan Sell"</span>, <span class='st'>"Shanna Layrock"</span><span class='op'>)</span>,
-  asg_long_term <span class='op'>=</span> <span class='st'>"Hawa Abdalla"</span>,
   api_token <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"redcap_NCA_token"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
@@ -144,16 +142,6 @@ with at most one additional case given to an investigator.</p>
     <tr>
       <th>date</th>
       <td><p>The date to use when checking whether investigators are scheduled</p></td>
-    </tr>
-    <tr>
-      <th>asg_school_age</th>
-      <td><p>Character vector of names of investigators to assign
-school-age cases</p></td>
-    </tr>
-    <tr>
-      <th>asg_long_term</th>
-      <td><p>Character vector of names of investigators to
-assign long term care facility cases</p></td>
     </tr>
     <tr>
       <th>api_token</th>
