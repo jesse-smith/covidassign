@@ -25,6 +25,7 @@
 get_investigators <- function(
   date = Sys.Date(),
   type = c("all", "general", "school"),
+  scheduled_only = TRUE,
   api_token = Sys.getenv("redcap_NCA_token"),
   quiet = TRUE
 ) {
@@ -34,7 +35,9 @@ get_investigators <- function(
   if (!quiet) rlang::inform("Loading investigators...")
 
   inv_scheduled <- purrr::when(
-    suppressMessages(sched_investigators(date = date)),
+    suppressMessages(
+      sched_investigators(date = date, scheduled_only = scheduled_only)
+    ),
     type == "general" ~ dplyr::filter(
       ., stringr::str_detect(.data[["team"]], "(?i)^[a-z]$")
     ),

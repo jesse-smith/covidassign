@@ -7,6 +7,7 @@
 get_investigators(
   date = Sys.Date(),
   type = c("all", "general", "school"),
+  scheduled_only = TRUE,
   api_token = Sys.getenv("redcap_NCA_token"),
   quiet = TRUE
 )
@@ -15,6 +16,9 @@ get_investigators(
 \item{date}{The date to use when checking whether investigators are scheduled}
 
 \item{type}{The type or group of investigators to return}
+
+\item{scheduled_only}{Should only scheduled investigators be returned? If
+\code{FALSE}, all investigators will be returned. Useful for debugging.}
 
 \item{api_token}{The API token for the Case Assignment REDcap project. The
 default pulls this from the environment variable \code{redcap_CA_token}.}

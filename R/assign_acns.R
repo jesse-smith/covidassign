@@ -64,6 +64,16 @@ assign_general <- function(
   ) %>%
     dplyr::mutate(id = as.integer(.data[["id"]]))
 
+  if (vec_is_empty(investigators)) {
+    investigators <- get_investigators(
+      date = date,
+      type = "general",
+      scheduled_only = FALSE,
+      api_token = api_token
+    ) %>%
+      dplyr::mutate(id = as.integer(.data[["id"]]))
+  }
+
   teams <- download_redcap_template() %>%
     dplyr::filter(.data[["field_name"]] == "team") %>%
     dplyr::pull("select_choices") %>%
@@ -81,6 +91,7 @@ assign_general <- function(
 
   # Get number of investigators needed
   n_reps <- n_cases %/% n_investigators
+  if (vec_is_empty(n_reps)) n_reps <- 0L
   n_additional <- n_cases - n_investigators * n_reps
 
   # Create randomized vector of investigator assignments
@@ -110,12 +121,22 @@ assign_school_age <- function(
   api_token = Sys.getenv("redcap_NCA_token")
 ) {
 
-  investigators <- get_investigators(date = date, api_token = api_token) %>%
-    dplyr::mutate(
-      id = as.integer(.data[["id"]]),
-      team = stringr::str_to_lower(.data[["team"]])
+  investigators <- get_investigators(
+    date = date,
+    type = "school",
+    api_token = api_token
+  ) %>%
+    dplyr::mutate(id = as.integer(.data[["id"]]))
+
+  if (vec_is_empty(investigators)) {
+    investigators <- get_investigators(
+      date = date,
+      type = "school",
+      scheduled_only = FALSE,
+      api_token = api_token
     ) %>%
-    dplyr::filter(.data[["team"]] == "school")
+      dplyr::mutate(id = as.integer(.data[["id"]]))
+  }
 
   data_school_age <- dplyr::filter(.data, .data[["school_age"]])
 
@@ -127,6 +148,7 @@ assign_school_age <- function(
 
   # Get number of investigators needed
   n_reps <- n_cases %/% n_investigators
+  if (vec_is_empty(n_reps) || is.infinite(n_reps)) n_reps <- 0L
   n_additional <- n_cases - n_investigators * n_reps
 
   # Create randomized vector of investigator assignments
