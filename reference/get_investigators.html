@@ -126,6 +126,7 @@ investigators in both lists are available for case assignment.</p>
     <pre class="usage"><span class='fu'>get_investigators</span><span class='op'>(</span>
   date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>,
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"all"</span>, <span class='st'>"general"</span>, <span class='st'>"school"</span><span class='op'>)</span>,
+  scheduled_only <span class='op'>=</span> <span class='cn'>TRUE</span>,
   api_token <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"redcap_NCA_token"</span><span class='op'>)</span>,
   quiet <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
@@ -140,6 +141,11 @@ investigators in both lists are available for case assignment.</p>
     <tr>
       <th>type</th>
       <td><p>The type or group of investigators to return</p></td>
+    </tr>
+    <tr>
+      <th>scheduled_only</th>
+      <td><p>Should only scheduled investigators be returned? If
+<code>FALSE</code>, all investigators will be returned. Useful for debugging.</p></td>
     </tr>
     <tr>
       <th>api_token</th>
