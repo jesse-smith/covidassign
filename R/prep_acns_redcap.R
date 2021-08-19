@@ -28,7 +28,8 @@ prep_acns_redcap <- function(
       nbs = as.character(.data[["nbs"]]),
       first_name = coviData::std_names(.data[["first_name"]], case = "title"),
       last_name = coviData::std_names(.data[["last_name"]], case = "title"),
-      address = stringr::str_to_title(.data[["address"]])
+      address = stringr::str_to_title(.data[["address"]]),
+      assigner = as.integer(5)
     ) %>%
     # Add `record_id`
     create_acns_record_id() %>%
